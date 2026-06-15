@@ -93,9 +93,14 @@ export const disciplines = [
         shapes: ["chladni", "interference"],
       },
       {
-        name: "Astrophysics and Chaos",
-        desc: "Curvature of spacetime and the behavior of complex dynamical systems.",
-        shapes: ["schwarzschild", "lorenz", "orrery"],
+        name: "Celestial Mechanics and Astrophysics",
+        desc: "The study of orbital motions and the nature of celestial bodies.",
+        shapes: ["orrery", "schwarzschild"],
+      },
+      {
+        name: "Chaos and Dynamical Systems",
+        desc: "Complex behaviors emerging from simple deterministic laws.",
+        shapes: ["lorenz"],
       },
       {
         name: "Quantum Mechanics",

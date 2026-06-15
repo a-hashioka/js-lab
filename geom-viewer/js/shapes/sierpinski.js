@@ -17,12 +17,12 @@ const lerp = (a, b, s) => ({
 
 /**
  * フラクタルの特定の進行度における幾何学的データを生成します。
- * @param {number} t - 連続的な進行度 (0.0 から 3.0)。
+ * @param {number} t - 連続的な進行度 (0.0 から 5.0)。
  * @param {number} scale - 全体のスケーリング。
  * @returns {Object} {vertices, faces, faceColors, hideVertices}
  */
 const generateSierpinski = (t, scale = 1.0) => {
-  const maxLevel = 3;
+  const maxLevel = 5;
   const t_capped = Math.min(t, maxLevel);
   const level = Math.floor(t_capped);
   const progress = t_capped % 1;
@@ -134,9 +134,9 @@ export const sierpinski = {
     { label: "Volume Limit", eq: "\\lim_{n \\to \\infty} V_n = 0" },
   ],
   generate: (counter = 0) => {
-    const cycle = 480;
+    const cycle = 600;
     const phase = (counter % cycle) / cycle;
-    const t = phase < 0.5 ? phase * 2 * 3.0 : (1 - phase) * 2 * 3.0;
+    const t = phase < 0.5 ? phase * 2 * 5.0 : (1 - phase) * 2 * 5.0;
     return generateSierpinski(t, 1.0);
   },
 };
