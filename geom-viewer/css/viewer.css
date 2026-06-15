@@ -1,0 +1,224 @@
+#visualizer-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  background-color: var(--bg);
+}
+
+#canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+
+#canvas:active {
+  cursor: grabbing;
+}
+
+#ui-layer {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.top-nav {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 20;
+  pointer-events: auto;
+}
+
+.back-link {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+
+.back-link:hover {
+  color: #000;
+}
+
+.shape-nav-sidebar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-top: 10px;
+}
+
+.nav-btn-sidebar {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #fff;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.nav-btn-sidebar:hover {
+  opacity: 0.7;
+}
+
+.nav-sep {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+#shape-title {
+  position: fixed;
+  top: 40px;
+  width: 100%;
+  text-align: center;
+  font-size: 1.75rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  pointer-events: none;
+  margin: 0;
+}
+
+#info-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid #000;
+  background: var(--bg);
+  color: #000;
+  cursor: pointer;
+  pointer-events: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+  z-index: 100;
+}
+
+#info-toggle:hover {
+  background: #000;
+  color: var(--bg);
+}
+
+#info-toggle .icon {
+  font-family: serif;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+#content-section {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 450px;
+  height: 100vh;
+  background: rgba(15, 15, 15, 0.8);
+  overflow-y: auto;
+  pointer-events: auto;
+  z-index: 50;
+  padding: 80px 40px;
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #f0f0f0;
+}
+
+#content-section.hidden {
+  display: block !important;
+  transform: translateX(100%);
+}
+
+.info-block {
+  margin-bottom: 60px;
+  width: 100%;
+}
+
+.info-block h3 {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 25px;
+  text-align: left;
+  display: block;
+}
+
+#shape-desc {
+  text-align: left;
+  width: 100%;
+}
+
+#shape-desc p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+#formula-list {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.formula-item {
+  width: 100%;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 20px;
+}
+
+.formula-label {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 12px;
+  display: block;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.formula-render {
+  font-size: 1.25rem;
+  overflow-x: auto;
+  padding: 10px 0;
+  color: #fff;
+}
+
+/* KaTeX specific overrides for dark background */
+.formula-render .katex {
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  #shape-title {
+    font-size: 1.5rem;
+    top: 60px;
+  }
+
+  #content-section {
+    max-width: 100%;
+    padding: 60px 25px;
+  }
+
+  .back-nav {
+    top: 15px;
+    left: 15px;
+  }
+}

@@ -1,0 +1,89 @@
+#gallery-container {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  padding-bottom: 100px;
+}
+
+.discipline-section {
+  width: 100%;
+}
+
+.discipline-header {
+  margin-bottom: 40px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+  text-align: left;
+}
+
+.discipline-header h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+  color: #000;
+}
+
+.discipline-desc {
+  font-size: 0.9rem;
+  color: var(--muted);
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+.group-container {
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+.group-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #000;
+  margin-bottom: 20px;
+  font-weight: 700;
+  border-left: 2px solid #000;
+  padding-left: 12px;
+}
+
+.shape-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.shape-list li {
+  margin: 0;
+}
+
+.shape-link {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #1a1a1a;
+  text-decoration: none;
+  transition: all 0.2s;
+  border-bottom: 1px solid transparent;
+}
+
+.shape-link:hover {
+  color: #000;
+  border-bottom-color: #000;
+}
+
+@media (max-width: 600px) {
+  #gallery-container {
+    gap: 50px;
+  }
+
+  .shape-list {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .shape-link {
+    font-size: 1rem;
+  }
+}
