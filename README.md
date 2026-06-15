@@ -1,7 +1,7 @@
 # JS Lab
 
-A collection of JavaScript experiments and interactive visualizations.
+JavaScriptの実験プロジェクトとインタラクティブなビジュアライゼーションのコレクション。
 
-## Projects
+## プロジェクト
 
-- **[Geometry Viewer](./geom-viewer/README.md)**: A modular 3D geometry visualizer built with Vanilla JS and HTML5 Canvas.
+- **[Geometry Viewer (幾何学ビューアー)](./geom-viewer/README.md)**: Vanilla JSとHTML5 Canvasで構築された、モジュール式の3D幾何学ビジュアライザー。
