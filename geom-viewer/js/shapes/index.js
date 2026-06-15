@@ -30,13 +30,13 @@ import { tesseract } from "./tesseract.js";
 // ギャラリー用の階層的なカテゴリを定義
 export const disciplines = [
   {
-    name: "I. Discrete Geometry & Polyhedral Theory",
-    theme: "geometry",
-    desc: "Study of discrete structures, convex polytopes, and their combinatorial properties.",
+    name: "Mathematics",
+    theme: "math",
+    desc: "The study of numbers, shapes, and patterns that form the foundation of logic.",
     groups: [
       {
-        name: "Convex Regular Polyhedra",
-        desc: "The fundamental Platonic solids defined by identical regular polygonal faces.",
+        name: "Platonic Solids",
+        desc: "Regular, convex polyhedra with identical faces made of regular polygons.",
         shapes: [
           "tetrahedron",
           "cube",
@@ -46,81 +46,62 @@ export const disciplines = [
         ],
       },
       {
-        name: "Semi-regular & Discrete Structures",
-        desc: "Archimedean solids and molecular geometries based on truncated structures.",
-        shapes: ["bucky"],
+        name: "Geometric Surfaces",
+        desc: "Fundamental shapes and smooth surfaces found in classical geometry.",
+        shapes: [
+          "sphere",
+          "torus",
+          "hyper",
+          "catenoid",
+          "enneper",
+          "dini",
+          "kuen",
+        ],
+      },
+      {
+        name: "Topology and Higher Dimensions",
+        desc: "Shapes that explore connectivity and dimensions beyond our everyday experience.",
+        shapes: ["mobius", "klein", "boy", "roman", "knot", "tesseract"],
       },
     ],
   },
   {
-    name: "II. Differential Geometry & Variational Calculus",
-    theme: "calculus",
-    desc: "Analysis of smooth manifolds, curvature tensors, and area-minimizing surfaces.",
+    name: "Physics",
+    theme: "physics",
+    desc: "The science of matter, energy, and the fundamental forces of the universe.",
     groups: [
       {
-        name: "Classical Surfaces of Revolution",
-        desc: "Fundamental quadric surfaces and geometries with rotational symmetry.",
-        shapes: ["sphere", "torus", "hyper"],
+        name: "Chaos Theory",
+        desc: "Complex systems where small changes can lead to vastly different outcomes.",
+        shapes: ["lorenz"],
       },
       {
-        name: "Minimal Surfaces",
-        desc: "Surfaces with vanishing mean curvature, locally minimizing surface area.",
-        shapes: ["catenoid", "enneper"],
-      },
-      {
-        name: "Surfaces of Constant Curvature",
-        desc: "Geometries exhibiting constant negative Gaussian curvature (pseudospherical surfaces).",
-        shapes: ["dini", "kuen"],
-      },
-    ],
-  },
-  {
-    name: "III. Topology & Knot Theory",
-    theme: "topology",
-    desc: "Investigation of properties preserved under continuous deformations and non-orientable manifolds.",
-    groups: [
-      {
-        name: "Non-orientable Manifolds",
-        desc: "Surfaces where a consistent normal vector cannot be globally defined.",
-        shapes: ["mobius", "klein", "boy", "roman"],
-      },
-      {
-        name: "Low-dimensional Topology",
-        desc: "Study of embeddings, invariants, and entangled topological structures.",
-        shapes: ["knot"],
-      },
-    ],
-  },
-  {
-    name: "IV. Algebraic & Higher-Dimensional Geometry",
-    theme: "algebraic",
-    desc: "Exploration of complex manifolds and polytopes in higher-dimensional Euclidean space.",
-    groups: [
-      {
-        name: "Higher-Dimensional Polytopes",
-        desc: "Projections of 4D convex regular polychora into three-dimensional space.",
-        shapes: ["tesseract"],
-      },
-      {
-        name: "Complex Algebraic Manifolds",
-        desc: "Ricci-flat manifolds and Fermat varieties arising in theoretical physics.",
+        name: "Theoretical Physics",
+        desc: "Mathematical models that attempt to explain the fundamental nature of reality.",
         shapes: ["calabi"],
       },
     ],
   },
   {
-    name: "V. Nonlinear Dynamics & Mathematical Biology",
-    theme: "science",
-    desc: "Geometric patterns emerging from chaotic systems and biological morphogenesis.",
+    name: "Chemistry",
+    theme: "chemistry",
+    desc: "The study of substances, their properties, and how they interact and change.",
     groups: [
       {
-        name: "Chaotic Systems & Attractors",
-        desc: "Non-linear dynamical systems exhibiting sensitive dependence on initial conditions.",
-        shapes: ["lorenz"],
+        name: "Molecular Structures",
+        desc: "The arrangement of atoms in molecules and solids.",
+        shapes: ["bucky"],
       },
+    ],
+  },
+  {
+    name: "Biology",
+    theme: "biology",
+    desc: "The study of living organisms and the vital processes that sustain life.",
+    groups: [
       {
-        name: "Geometric Morphogenesis",
-        desc: "Mathematical models of organic structures and biological growth laws.",
+        name: "Genetics and Biological Forms",
+        desc: "The geometric patterns found in DNA and organic growth.",
         shapes: ["dna", "super"],
       },
     ],
