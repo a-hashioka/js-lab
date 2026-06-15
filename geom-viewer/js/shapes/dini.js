@@ -9,15 +9,20 @@ export const dini = {
   title: "Dini's Surface",
   hideVertices: true,
   desc: [
-    "Dini's surface is a surface with constant negative Gaussian curvature. It is constructed by twisting a pseudosphere and is a rare example of a helicoid with constant curvature.",
-    "It is named after the Italian mathematician Ulisse Dini. It is an important object in the study of differential geometry. Its complex spiral appearance arises from a combination of vertical linear motion and circular motion.",
+    "Dini's surface is a surface of constant negative Gaussian curvature, making it a model for hyperbolic geometry. It is constructed by twisting a pseudosphere into a helicoid-like shape, resulting in a complex spiral that extends infinitely while maintaining its geometric properties. It is a critical example in the study of non-Euclidean surfaces.",
+    "Named after the Italian mathematician Ulisse Dini, the surface is a specific type of pseudospherical surface. It is mathematically unique for its combination of logarithmic and trigonometric functions in its parametrization, providing a bridge between the geometry of spheres and the topology of helicoids.",
   ],
   formulas: [
-    { label: "Gaussian Curvature", eq: "K = -1" },
     {
-      label: "Parametric Representation",
-      eq: "\\begin{cases} x = a\\cos u\\sin v \\\\ y = a\\sin u\\sin v \\\\ z = a(\\cos v + \\ln(\\tan\\frac{v}{2})) + bu \\end{cases}",
+      label: "Parametric Equations",
+      eq: "\\\\begin{cases} x = a\\\\cos u\\\\sin v \\\\\\\\ y = a\\\\sin u\\\\sin v \\\\\\\\ z = a(\\\\cos v + \\\\ln(\\\\tan\\\\frac{v}{2})) + bu \\\\end{cases}",
     },
+    { label: "Gaussian Curvature", eq: "K = -\\\\frac{1}{a^2}" },
+    {
+      label: "Symbols",
+      eq: "u \\\\in [0, 4\\\\pi], \\\\quad v \\\\in (0, \\\\pi), \\\\quad a: \\\\text{radius}, \\\\quad b: \\\\text{twist factor}",
+    },
+    { label: "Parameters", eq: "a = 1.0, \\\\quad b = 0.15, \\\\quad s = 0.3" },
   ],
   /**
    * ディニ曲面の頂点と面を生成します。

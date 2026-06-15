@@ -9,12 +9,18 @@ import { PHI } from "../constants.js";
 export const dodecahedron = {
   title: "Dodecahedron",
   desc: [
-    "A dodecahedron is a polyhedron with 12 regular pentagonal faces.",
-    "It has many connections to the golden ratio and features 20 vertices and 30 edges.",
+    "The regular dodecahedron is a Platonic solid composed of twelve regular pentagonal faces, twenty vertices, and thirty edges. It possesses icosahedral symmetry and is deeply connected to the golden ratio (phi), which governs its spatial coordinates and dihedral angles. It is one of the five convex regular polyhedra known since antiquity.",
+    "In Plato's cosmology, the dodecahedron was associated with the 'Aether' or the universe as a whole, representing the divine quintessence. Its geometry appears in various natural contexts, from the structure of certain viruses to the proposed models of the shape of the universe, such as the Poincaré dodecahedral space.",
   ],
   formulas: [
-    { label: "Golden Ratio", eq: "\\phi = \\frac{1 + \\sqrt{5}}{2}" },
-    { label: "Volume", eq: "V = \\frac{15 + 7\\sqrt{5}}{4}a^3" },
+    { label: "Volume", eq: "V = \\\\frac{15 + 7\\\\sqrt{5}}{4} a^3" },
+    { label: "Surface Area", eq: "A = 3\\\\sqrt{25 + 10\\\\sqrt{5}} a^2" },
+    { label: "Golden Ratio", eq: "\\\\phi = \\\\frac{1 + \\\\sqrt{5}}{2}" },
+    {
+      label: "Symbols",
+      eq: "a: \\\\text{edge length}, \\\\quad \\\\phi: \\\\text{golden ratio}, \\\\quad V: \\\\text{vertices}, \\\\quad E: \\\\text{edges}, \\\\quad F: \\\\text{faces}",
+    },
+    { label: "Parameters", eq: "\\\\phi \\\\approx 1.618" },
   ],
   /**
    * 正十二面体の頂点と面を生成します。

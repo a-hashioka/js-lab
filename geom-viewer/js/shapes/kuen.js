@@ -9,12 +9,20 @@ export const kuen = {
   title: "Kuen Surface",
   hideVertices: true,
   desc: [
-    "The Kuen surface is a famous example of a surface with constant negative Gaussian curvature. It is characterized by complex and very beautiful self-intersections.",
-    "It belongs to the family of pseudospherical surfaces. Unlike a sphere, which has constant positive curvature, the Kuen surface illustrates properties of hyperbolic geometry in a visual 3D context.",
+    "The Kuen surface is a non-compact surface with a constant negative Gaussian curvature of -1. It is a pseudospherical surface that features intricate self-intersections and a singular set. Mathematically, it is an immersion of the pseudosphere (Tractroid) into 3D space, preserving the constant negative curvature property.",
+    "It is named after the German mathematician Alfred Kuen, who first described it in 1884. The surface is significant in the study of differential geometry and solitons, as it relates to solutions of the Sine-Gordon equation, a key equation in non-linear physics and geometry.",
   ],
   formulas: [
+    {
+      label: "Parametric Equations",
+      eq: "\\\\begin{cases} x = \\\\frac{2(\\\\cos u + u \\\\sin u) \\\\sin v}{1 + u^2 \\\\sin^2 v} \\\\\\\\ y = \\\\frac{2(\\\\sin u - u \\\\cos u) \\\\sin v}{1 + u^2 \\\\sin^2 v} \\\\\\\\ z = \\\\ln(\\\\tan \\\\frac{v}{2}) + \\\\frac{2 \\\\cos v}{1 + u^2 \\\\sin^2 v} \\\\end{cases}",
+    },
     { label: "Gaussian Curvature", eq: "K = -1" },
-    { label: "Euler Characteristic", eq: "\\chi = -2" },
+    { label: "Symbols", eq: "u, v \\\\text{ are parameters}" },
+    {
+      label: "Parameters",
+      eq: "u \\\\in [-4.5, 4.5], v \\\\in (0, \\\\pi)",
+    },
   ],
   generate: () =>
     parametric(

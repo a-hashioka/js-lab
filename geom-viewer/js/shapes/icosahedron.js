@@ -47,12 +47,17 @@ export const ICO_FACES = [
 export const icosahedron = {
   title: "Icosahedron",
   desc: [
-    "An icosahedron is a polyhedron with 20 faces, which are equilateral triangles. It has the most faces of all Platonic solids.",
-    "It is often used as a model for viral capsids and geodesic domes due to its efficiency in approximating a sphere.",
+    "The regular icosahedron is a Platonic solid consisting of twenty equilateral triangular faces, twelve vertices, and thirty edges. It exhibits icosahedral symmetry, the highest symmetry of any convex regular polyhedron, and is the dual of the regular dodecahedron. Its geometry is defined by the golden ratio, which determines the spatial distribution of its vertices.",
+    "In the Platonic tradition, the icosahedron was associated with the element of 'Water' due to its fluid-like, nearly spherical appearance. In modern science, its structure is a fundamental model for viral capsids (the protein shells of viruses) and geodesic domes, providing a highly efficient way to enclose a volume with minimal surface area.",
   ],
   formulas: [
-    { label: "Volume", eq: "V = \\frac{5(3 + \\sqrt{5})}{12}a^3" },
-    { label: "Surface Area", eq: "S = 5\\sqrt{3}a^2" },
+    { label: "Volume", eq: "V = \\\\frac{5(3 + \\\\sqrt{5})}{12} a^3" },
+    { label: "Surface Area", eq: "A = 5\\\\sqrt{3} a^2" },
+    { label: "Euler Characteristic", eq: "\\\\chi = V - E + F = 2" },
+    {
+      label: "Symbols",
+      eq: "a: \\\\text{edge length}, \\\\quad V: \\\\text{vertices}, \\\\quad E: \\\\text{edges}, \\\\quad F: \\\\text{faces}",
+    },
   ],
   /**
    * 正二十面体の頂点と面を生成します。

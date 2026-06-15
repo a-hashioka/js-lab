@@ -13,9 +13,24 @@ export const calabi = {
   title: "Calabi-Yau Manifold",
   hideVertices: true,
   desc: [
-    "Calabi-Yau manifolds are special complex manifolds that play a central role in string theory.",
+    "A Calabi-Yau manifold is a type of complex manifold that is Ricci-flat and has a vanishing first Chern class. In string theory, these manifolds are hypothesized to form the internal 'extra dimensions' of the universe, compactified at the Planck scale to explain the physics of our four-dimensional spacetime.",
+    "Named after Eugenio Calabi and Shing-Tung Yau, these spaces represent a profound intersection of algebraic geometry and theoretical physics. This visualization shows a 3D projection of a quintic threefold (a Fermat quintic), revealing the intricate, non-trivial topology required to maintain supersymmetry in multidimensional models.",
   ],
-  formulas: [{ label: "Fermat Quintic", eq: "z_1^5 + z_2^5 = 1" }],
+  formulas: [
+    { label: "Fermat Quintic", eq: "z_1^n + z_2^n + \\\\dots + z_{m+1}^n = 0" },
+    {
+      label: "Parametrization",
+      eq: "z_1 = e^{i\\\\theta} \\\\cos(2\\\\phi/n), \\\\quad z_2 = e^{i\\\\theta} \\\\sin(2\\\\phi/n)",
+    },
+    {
+      label: "Symbols",
+      eq: "z_i: \\\\text{complex coordinates}, \\\\quad n: \\\\text{degree}, \\\\quad \\\\phi, \\\\theta: \\\\text{angles}",
+    },
+    {
+      label: "Parameters",
+      eq: "n = 5, \\\\quad \\\\alpha = 0.5, \\\\quad s = 0.8",
+    },
+  ],
   generate: () => {
     const v = [],
       f = [],

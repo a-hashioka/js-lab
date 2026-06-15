@@ -13,13 +13,21 @@ export const knot = {
   title: "Torus Knot",
   hideVertices: true,
   desc: [
-    "A torus knot is a special kind of knot that lies on the surface of an unknotted torus in three-dimensional space.",
-    "This model shows a (3,2) torus knot, which is topologically equivalent to the trefoil knot.",
+    "A torus knot is a specific type of knot that lies on the surface of an unknotted torus in R³. It is characterized by two coprime integers p and q, representing the number of times the knot winds around the torus's longitudinal and meridional axes, respectively. These knots are fundamental objects in knot theory, a branch of algebraic topology.",
+    "The (3,2) torus knot shown here is topologically equivalent to the trefoil knot, the simplest non-trivial knot. Torus knots are examples of fibered knots and play a significant role in the study of dynamical systems, singularity theory, and the mathematical properties of braided structures.",
   ],
   formulas: [
     {
       label: "Parametric Equations",
-      eq: "\\begin{cases} x = (R + r\\cos q\\phi)\\cos p\\phi \\\\ y = (R + r\\cos q\\phi)\\sin p\\phi \\\\ z = r\\sin q\\phi \\end{cases}",
+      eq: "\\\\begin{cases} x = (R + r\\\\cos q\\\\phi)\\\\cos p\\\\phi \\\\\\\\ y = (R + r\\\\cos q\\\\phi)\\\\sin p\\\\phi \\\\\\\\ z = r\\\\sin q\\\\phi \\\\end{cases}",
+    },
+    {
+      label: "Symbols",
+      eq: "p, q: \\\\text{winding numbers}, \\\\quad \\\\phi: \\\\text{angle}, \\\\quad R: \\\\text{major radius}, \\\\quad r: \\\\text{minor radius}",
+    },
+    {
+      label: "Parameters",
+      eq: "p = 3, \\\\quad q = 2, \\\\quad R = 0.7, \\\\quad r = 0.2",
     },
   ],
   generate: () => {

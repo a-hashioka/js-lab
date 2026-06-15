@@ -10,14 +10,23 @@
 export const dna = {
   title: "Double Helix (DNA)",
   desc: [
-    "A simplified and symbolic representation of the Deoxyribonucleic Acid (DNA) molecule, highlighting the elegant geometric structure of the double helix.",
-    "Two sugar-phosphate backbones spiral in parallel, connected by base pairs that hold the genetic information for all living organisms.",
-    "This visualization balances scientific structure with artistic minimalism, using spheres to represent key connection points in the molecular chain.",
+    "The double helix is the geometric representation of Deoxyribonucleic acid (DNA), the molecule that carries genetic instructions for life. This structure consists of two congruent helices with the same axis, differing by a translation along the axis. It is a masterpiece of biological efficiency, allowing for dense packing and stable replication of genetic data.",
+    "The structural model was famously elucidated by James Watson and Francis Crick in 1953, based on X-ray diffraction data from Rosalind Franklin and Maurice Wilkins. Geometrically, it represents a right-handed spiral where two sugar-phosphate backbones are connected by base-pair rungs (Adenine-Thymine and Cytosine-Guanine), illustrating the principle of complementarity.",
   ],
   formulas: [
-    { label: "Helix Radius", eq: "r = 0.5" },
-    { label: "Vertical Pitch", eq: "P = 2.0" },
-    { label: "Base Pairs", eq: "\\text{A-T, C-G}" },
+    {
+      label: "Parametric Helix",
+      eq: "\\\\begin{cases} x = r\\\\cos t \\\\\\\\ y = h t \\\\\\\\ z = r\\\\sin t \\\\end{cases}",
+    },
+    { label: "Pitch", eq: "P = 2\\\\pi h" },
+    {
+      label: "Symbols",
+      eq: "r: \\\\text{radius}, \\\\quad h: \\\\text{vertical rise per radian}, \\\\quad t: \\\\text{angle}",
+    },
+    {
+      label: "Parameters",
+      eq: "r = 0.15, \\\\quad P = 0.2, \\\\quad \\\\text{rotations} = 3.0",
+    },
   ],
   generate: () => {
     const v = [],

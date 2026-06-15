@@ -9,12 +9,31 @@ export const boy = {
   title: "Boy's Surface",
   hideVertices: true,
   desc: [
-    "Boy's surface is an immersion of the real projective plane in 3-dimensional space. It was discovered by Werner Boy in 1901, solving the problem of finding an immersion of the projective plane without singularities (no sharp points).",
-    "Unlike the Roman surface, Boy's surface has no sharp edges or singularities, only self-intersections. It is a highly complex topological object and remains a subject of study in differential geometry.",
+    "Boy's surface is an immersion of the real projective plane (RP²) in three-dimensional space. It is a non-orientable surface with a single triple point and no other singularities, possessing a continuous tangent plane at every point. It is a critical object in differential geometry and topology, representing a smooth mapping of a compact, non-orientable surface into R³.",
+    "Discovered by Werner Boy in 1901 under the direction of David Hilbert, the surface settled the question of whether a smooth immersion of the real projective plane into R³ was possible. Unlike the Roman and Cross-cap surfaces, Boy's surface has no pinch point singularities, making it a masterpiece of topological construction.",
   ],
   formulas: [
-    { label: "Topology", eq: "\\text{Immersion of } \\mathbb{RP}^2" },
-    { label: "Euler Characteristic", eq: "\\chi = 1" },
+    {
+      label: "Parametric Equations (Apéry)",
+      eq: "x = \\\\frac{\\\\sqrt{2}\\\\cos(2u)\\\\cos^2(v) + \\\\cos(u)\\\\sin(2v)}{2 - \\\\sqrt{2}\\\\sin(3u)\\\\sin(2v)}",
+    },
+    {
+      label: "y-component",
+      eq: "y = \\\\frac{\\\\sqrt{2}\\\\sin(2u)\\\\cos^2(v) - \\\\sin(u)\\\\sin(2v)}{2 - \\\\sqrt{2}\\\\sin(3u)\\\\sin(2v)}",
+    },
+    {
+      label: "z-component",
+      eq: "z = \\\\frac{3\\\\cos^2(v)}{2 - \\\\sqrt{2}\\\\sin(3u)\\\\sin(2v)} - 1.25",
+    },
+    { label: "Euler Characteristic", eq: "\\\\chi = 1" },
+    {
+      label: "Symbols",
+      eq: "u \\\\in [0, \\\\pi], \\\\quad v \\\\in [0, \\\\pi], \\\\quad x, y, z: \\\\text{coordinates}",
+    },
+    {
+      label: "Parameters",
+      eq: "d = 2 - \\\\sqrt{2}\\\\sin(3u)\\\\sin(2v), \\\\quad s = 0.5",
+    },
   ],
   /**
    * ボーイ曲面の頂点と面を生成します。

@@ -6,12 +6,18 @@
 export const octahedron = {
   title: "Octahedron",
   desc: [
-    "The octahedron is a polyhedron with 8 faces, 12 edges, and 6 vertices. A regular octahedron is composed of 8 equilateral triangles.",
-    "It is the dual polyhedron of a cube and can be thought of as two square pyramids joined at their bases.",
+    "The regular octahedron is a Platonic solid with 8 equilateral triangular faces, 12 edges, and 6 vertices. It exhibits octahedral symmetry (O_h) and is the dual polyhedron of the cube. It can be viewed as a rectified tetrahedron or a square bipyramid. Its vertices are located at the permutations of (\pm 1, 0, 0).",
+    "Known since antiquity, it was described by Plato in the 'Timaeus' as representing the element of Air. In crystallography, it is a common form for various minerals, such as diamond and fluorite, due to their cubic crystal systems.",
   ],
   formulas: [
-    { label: "Volume", eq: "V = \\frac{\\sqrt{2}}{3}a^3" },
-    { label: "Surface Area", eq: "S = 2\\sqrt{3}a^2" },
+    { label: "Implicit Representation", eq: "|x| + |y| + |z| = a" },
+    { label: "Volume", eq: "V = \\\\frac{\\\\sqrt{2}}{3} a^3" },
+    { label: "Surface Area", eq: "S = 2\\\\sqrt{3} a^2" },
+    { label: "Symbols", eq: "a \\\\text{ is the edge length}" },
+    {
+      label: "Parameters",
+      eq: "\\\\text{Vertices at } (\\\\pm 1, 0, 0), (0, \\\\pm 1, 0), (0, 0, \\\\pm 1)",
+    },
   ],
   /**
    * 正八面体の頂点と面を生成します。

@@ -6,12 +6,18 @@
 export const cube = {
   title: "Cube",
   desc: [
-    "A cube is a three-dimensional solid object bounded by six square faces. It is the only regular hexahedron and is one of the five Platonic solids.",
-    "It has 12 edges and 8 vertices. It is a highly stable shape with octahedral symmetry.",
+    "The cube, or regular hexahedron, is a Platonic solid with six square faces, eight vertices, and twelve edges. It is a highly symmetric object belonging to the octahedral point group, where every face, edge, and vertex is geometrically equivalent, making it the most fundamental shape in Euclidean geometry and spatial tiling.",
+    "In Plato's Timaeus, the cube was associated with the element of 'Earth' due to its stability and ability to tile space (tessellation). It is the dual of the regular octahedron and serves as the basis for the Cartesian coordinate system, representing the volume of three-dimensional space in its simplest form.",
   ],
   formulas: [
     { label: "Volume", eq: "V = a^3" },
-    { label: "Surface Area", eq: "S = 6a^2" },
+    { label: "Surface Area", eq: "A = 6a^2" },
+    { label: "Euler Characteristic", eq: "\\\\chi = V - E + F = 2" },
+    {
+      label: "Symbols",
+      eq: "a: \\\\text{side length}, \\\\quad V: \\\\text{vertices}, \\\\quad E: \\\\text{edges}, \\\\quad F: \\\\text{faces}",
+    },
+    { label: "Parameters", eq: "s = 1/\\\\sqrt{3} \\\\text{ (normalization)}" },
   ],
   /**
    * 立方体の頂点と面を生成します。

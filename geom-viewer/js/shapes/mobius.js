@@ -9,16 +9,20 @@ export const mobius = {
   title: "Möbius Strip",
   hideVertices: true,
   desc: [
-    "A Möbius strip is a surface with only one side and only one boundary. It is the simplest non-orientable surface. If you travel along the length of the strip, you will return to your starting point but on the 'other' side.",
-    "It was discovered independently by August Ferdinand Möbius and Johann Benedict Listing in 1858. It is a classic example in topology, showing how a simple twist can change the fundamental properties of a manifold.",
+    "The Möbius strip is a surface with only one side and one boundary component. It is the most basic example of a non-orientable surface in topology. A normal vector moved along the strip will return to its starting position pointing in the opposite direction. It is a fiber bundle over the circle S^1 with the fiber being an interval.",
+    "It was discovered independently by German mathematicians August Ferdinand Möbius and Johann Benedict Listing in 1858. It has become a cultural icon for infinity and recursion, while mathematically serving as a gateway to understanding more complex non-orientable manifolds like the Klein bottle and projective planes.",
   ],
   formulas: [
-    { label: "Euler Characteristic", eq: "\\chi = 0" },
-    { label: "Boundary", eq: "\\partial M \\cong S^1" },
     {
-      label: "Parametric (Centerline)",
-      eq: "\\begin{cases} x = r\\cos\\theta \\\\ y = r\\sin\\theta \\\\ z = 0 \\end{cases}",
+      label: "Parametric Equations",
+      eq: "\\\\begin{cases} x = (1 + \\\\frac{v}{2} \\\\cos \\\\frac{u}{2}) \\\\cos u \\\\\\\\ y = (1 + \\\\frac{v}{2} \\\\cos \\\\frac{u}{2}) \\\\sin u \\\\\\\\ z = \\\\frac{v}{2} \\\\sin \\\\frac{u}{2} \\\\end{cases}",
     },
+    { label: "Euler Characteristic", eq: "\\\\chi = 0" },
+    {
+      label: "Symbols",
+      eq: "u \\\\in [0, 2\\\\pi] \\\\text{ (angle)}, v \\\\in [-w, w] \\\\text{ (width)}",
+    },
+    { label: "Parameters", eq: "R = 1, w = 0.5" },
   ],
   generate: () =>
     parametric(64, 10, (u, v) => {

@@ -9,13 +9,20 @@ export const klein = {
   title: "Klein Bottle",
   hideVertices: true,
   desc: [
-    "The Klein bottle is a non-orientable closed surface with no boundary. It cannot be embedded in three-dimensional space without self-intersection. It is a 2D manifold where a normal vector cannot be consistently defined.",
-    "Mathematically, it can be thought of as two Möbius strips joined along their boundaries. In four-dimensional space, it can be closed without self-intersection, becoming a 'closed' surface like a sphere, but with very different topological properties.",
+    "The Klein bottle is a non-orientable closed surface with no boundary, representing a topological space where a consistent notion of 'inside' and 'outside' does not exist. It is a two-dimensional manifold that cannot be embedded in three-dimensional Euclidean space without self-intersection, though it can be perfectly realized in four or more dimensions.",
+    "First described by Felix Klein in 1882, the bottle can be conceptualized as two Möbius strips joined along their boundaries or as a rectangle where opposite sides are glued with a specific twist. Its properties, such as its vanishing Euler characteristic, make it a cornerstone of algebraic topology and the study of non-orientable manifolds.",
   ],
   formulas: [
-    { label: "Euler Characteristic", eq: "\\chi(M) = 0" },
-    { label: "Genus", eq: "g = 2" },
-    { label: "Chromatic Number", eq: "\\gamma(M) = 6" },
+    { label: "Euler Characteristic", eq: "\\\\chi = 0" },
+    {
+      label: "Fundamental Group",
+      eq: "\\\\pi_1(K) = \\\\langle a, b \\\\mid abab^{-1} = 1 \\\\rangle",
+    },
+    {
+      label: "Symbols",
+      eq: "u, v: \\\\text{parameters}, \\\\quad x, y, z: \\\\text{coordinates}",
+    },
+    { label: "Parameters", eq: "s = 0.4" },
   ],
   generate: () =>
     parametric(

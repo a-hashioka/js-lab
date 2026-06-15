@@ -9,7 +9,23 @@
  */
 export const tesseract = {
   title: "Tesseract",
-  desc: ["A tesseract is the four-dimensional analogue of a cube."],
+  desc: [
+    "The tesseract, also known as an 8-cell or regular octachoron, is the four-dimensional analogue of the 3D cube. It consists of 16 vertices, 32 edges, 24 square faces, and 8 cubic cells. In this viewer, it is represented via a perspective projection from 4D to 3D, allowing for the visualization of its internal structure and rotation in hyperspace.",
+    "The concept of higher-dimensional polytopes was pioneered by Ludwig Schläfli in the mid-19th century. The term 'tesseract' was later coined by Charles Howard Hinton in 1888. It has since become a staple of science fiction and mathematical art as a way to contemplate the existence of a fourth spatial dimension.",
+  ],
+  formulas: [
+    { label: "Vertices", eq: "(\\\\pm 1, \\\\pm 1, \\\\pm 1, \\\\pm 1)" },
+    { label: "Hypervolume", eq: "V_{4D} = a^4" },
+    {
+      label: "3D Projection",
+      eq: "P(x, y, z, w) = \\\\frac{1}{d - w} (x, y, z)",
+    },
+    {
+      label: "Symbols",
+      eq: "a \\\\text{ (side)}; w \\\\text{ (4th coord)}; d \\\\text{ (camera dist)}",
+    },
+    { label: "Parameters", eq: "\\\\text{Dimension } n=4" },
+  ],
   is4D: true,
   generate: () => {
     const v4 = [];

@@ -9,13 +9,18 @@ import { ICO_VERTICES, ICO_FACES } from "./icosahedron.js";
 export const bucky = {
   title: "Buckyball (C60)",
   desc: [
-    "Buckminsterfullerene (C60) is a molecule where 60 carbon atoms are arranged in a 'truncated icosahedron' structure, the same geometry as a standard soccer ball.",
-    "The shape consists of 12 pentagonal and 20 hexagonal faces. Every vertex is identical, connecting two hexagons and one pentagon. This discovery led to the 1996 Nobel Prize in Chemistry.",
+    "The Buckyball, or truncated icosahedron, is an Archimedean solid consisting of 12 pentagonal and 20 hexagonal faces. It gained worldwide fame as the molecular structure of Buckminsterfullerene (C60), where carbon atoms occupy the 60 vertices of the polyhedron, forming a stable, cage-like architecture.",
+    "This geometry is named after R. Buckminster Fuller, whose geodesic domes share similar structural principles. It is the standard shape of a soccer ball and is central to the field of nanotechnology and carbon science, where it represents a bridge between discrete mathematics and physical chemistry.",
   ],
   formulas: [
     { label: "Vertices", eq: "V = 60" },
     { label: "Edges", eq: "E = 90" },
-    { label: "Faces", eq: "F = 32" },
+    { label: "Faces", eq: "F = 32 \\\\text{ (12 pentagons, 20 hexagons)}" },
+    { label: "Euler Characteristic", eq: "\\\\chi = V - E + F = 2" },
+    {
+      label: "Symbols",
+      eq: "V: \\\\text{vertices}, \\\\quad E: \\\\text{edges}, \\\\quad F: \\\\text{faces}",
+    },
   ],
   /**
    * バッキーボール（切頂二十面体）の頂点と面を生成します。

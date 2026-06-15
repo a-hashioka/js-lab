@@ -12,7 +12,19 @@ export const lorenz = {
   title: "Lorenz Attractor",
   hideVertices: true,
   desc: [
-    "The Lorenz attractor is a set of chaotic solutions of the Lorenz system. It is one of the most famous examples of a strange attractor.",
+    "The Lorenz attractor is a fractal structure that arises from a system of three ordinary differential equations. It is a 'strange attractor,' meaning it has a non-integer Hausdorff dimension and exhibits sensitive dependence on initial conditions, a core characteristic of chaos theory. The resulting trajectory traces a butterfly-like shape in three-dimensional space.",
+    "It was introduced by Edward Lorenz in 1963 while he was studying atmospheric convection. His discovery of this chaotic system led to the formalization of the 'butterfly effect,' where small changes in initial states can result in vastly different outcomes, revolutionizing modern meteorology and non-linear dynamics.",
+  ],
+  formulas: [
+    {
+      label: "Lorenz System",
+      eq: "\\\\begin{cases} \\\\frac{dx}{dt} = \\\\sigma (y - x) \\\\\\\\ \\\\frac{dy}{dt} = x (\\\\rho - z) - y \\\\\\\\ \\\\frac{dz}{dt} = xy - \\\\beta z \\\\end{cases}",
+    },
+    {
+      label: "Symbols",
+      eq: "x, y, z \\\\text{ are coordinates}; \\\\sigma, \\\\rho, \\\\beta \\\\text{ are system parameters}",
+    },
+    { label: "Parameters", eq: "\\\\sigma=10, \\\\rho=28, \\\\beta=8/3" },
   ],
   generate: (limit = 3000) => {
     const v = [];
