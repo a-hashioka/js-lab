@@ -22,6 +22,12 @@ export const vec = {
   sub: (v1, v2) => ({ x: v1.x - v2.x, y: v1.y - v2.y, z: v1.z - v2.z }),
   mul: (v, s) => ({ x: v.x * s, y: v.y * s, z: v.z * s }),
   div: (v, s) => ({ x: v.x / s, y: v.y / s, z: v.z / s }),
+  dot: (v1, v2) => v1.x * v2.x + v1.y * v2.y + v1.z * v2.z,
+  cross: (v1, v2) => ({
+    x: v1.y * v2.z - v1.z * v2.y,
+    y: v1.z * v2.x - v1.x * v2.z,
+    z: v1.x * v2.y - v1.y * v2.x,
+  }),
   midpoint: (v1, v2) => ({
     x: (v1.x + v2.x) / 2,
     y: (v1.y + v2.y) / 2,
@@ -74,7 +80,8 @@ export const subdivide = (geometry, shouldNormalize = false) => {
 
 /**
  * パス（曲線）に沿って管状のメッシュ（チューブ）を生成します。
- * フレネ・セレの標構（接線、法線、副法線）を使用して断面を計算します。
+ * 並行移動標構（Parallel Transport Frame）を使用して、ねじれを最小限に抑え、
+ * 閉じたパスの場合はホロノミー（ねじれの累積）を均等に分散させます。
  *
  * @param {Function} pathFunc - パス上の点(t)を返す関数。tは0から1。
  * @param {number} segU - パス方向の分割数。
@@ -86,59 +93,117 @@ export const subdivide = (geometry, shouldNormalize = false) => {
 export const tube = (pathFunc, segU, segV, radius, closed = false) => {
   const vertices = [];
   const faces = [];
+  const frames = [];
 
+  // 1. 各ポイントでの接線を計算
+  const tangents = [];
   for (let i = 0; i <= segU; i++) {
     const t = i / segU;
-    const p = pathFunc(t);
-
-    // 接線(T)の計算（差分法）
-    const dt = 0.0001;
+    const dt = 0.001;
     let T;
     if (closed) {
-      // 閉じたパスの場合、ラップアラウンドを使用して接線を計算
       const pNext = pathFunc((t + dt) % 1);
       const pPrev = pathFunc((t - dt + 1) % 1);
       T = normalize(vec.sub(pNext, pPrev));
     } else {
-      // 開いたパスの場合、端点を超えないように接線を計算
       const pNext = pathFunc(Math.min(t + dt, 1));
       const pPrev = pathFunc(Math.max(t - dt, 0));
       T = normalize(vec.sub(pNext, pPrev));
     }
+    tangents.push(T);
+  }
 
-    // 法線(N)と副法線(B)の計算
-    let up = { x: 0, y: 1, z: 0 };
-    if (Math.abs(T.y) > 0.9) up = { x: 1, y: 0, z: 0 };
+  // 2. 並行移動標構を構築 (Bishop Frame)
+  let T0 = tangents[0];
+  let up = { x: 0, y: 1, z: 0 };
+  if (Math.abs(T0.y) > 0.9) up = { x: 1, y: 0, z: 0 };
+  let B0 = normalize(vec.cross(T0, up));
+  let N0 = vec.cross(B0, T0);
+  frames.push({ T: T0, B: B0, N: N0 });
 
-    const B = normalize({
-      x: T.y * up.z - T.z * up.y,
-      y: T.z * up.x - T.x * up.z,
-      z: T.x * up.y - T.y * up.x,
-    });
-    const N = {
-      x: B.y * T.z - B.z * T.y,
-      y: B.z * T.x - B.x * T.z,
-      z: B.x * T.y - B.y * T.x,
-    };
+  const rotate = (v, a, theta) => {
+    const cos = Math.cos(theta), sin = Math.sin(theta);
+    return vec.add(
+      vec.add(vec.mul(v, cos), vec.mul(vec.cross(a, v), sin)),
+      vec.mul(a, vec.dot(a, v) * (1 - cos))
+    );
+  };
 
-    for (let j = 0; j <= segV; j++) {
+  for (let i = 1; i <= segU; i++) {
+    const T_prev = tangents[i - 1];
+    const T_curr = tangents[i];
+    const axis = vec.cross(T_prev, T_curr);
+    let B_curr, N_curr;
+
+    if (vec.dot(axis, axis) < 0.000001) {
+      B_curr = frames[i - 1].B;
+      N_curr = frames[i - 1].N;
+    } else {
+      const axis_n = normalize(axis);
+      const angle = Math.acos(Math.max(-1, Math.min(1, vec.dot(T_prev, T_curr))));
+      B_curr = normalize(rotate(frames[i - 1].B, axis_n, angle));
+      N_curr = vec.cross(B_curr, T_curr);
+    }
+    frames.push({ T: T_curr, B: B_curr, N: N_curr });
+  }
+
+  // 3. ホロノミーの補正 (閉じたパスの場合、始点と終点のねじれを合わせる)
+  let twistOffset = 0;
+  if (closed) {
+    const B_start = frames[0].B;
+    const B_end = frames[segU].B;
+    const T_end = frames[segU].T;
+    
+    // 終点での B と始点での B の間の角度を計算
+    let cos = vec.dot(B_start, B_end);
+    let sin = vec.dot(vec.cross(B_end, B_start), T_end);
+    twistOffset = Math.atan2(sin, cos);
+  }
+
+  // 4. 頂点の生成 (重複を避ける)
+  const numU = closed ? segU : segU + 1;
+  const numV = segV; // 断面は常に閉じるので重複を避ける
+
+  for (let i = 0; i < numU; i++) {
+    const p = pathFunc(i / segU);
+    let { B, N, T } = frames[i];
+    
+    // ねじれを均等に分散
+    if (closed && twistOffset !== 0) {
+      const angle = (i / segU) * twistOffset;
+      B = rotate(B, T, angle);
+      N = rotate(N, T, angle);
+    }
+
+    for (let j = 0; j < numV; j++) {
       const v = (j / segV) * Math.PI * 2;
-      const cv = Math.cos(v),
-        sv = Math.sin(v);
+      const cv = Math.cos(v), sv = Math.sin(v);
 
       vertices.push({
         x: p.x + radius * (cv * N.x + sv * B.x),
         y: p.y + radius * (cv * N.y + sv * B.y),
         z: p.z + radius * (cv * N.z + sv * B.z),
       });
+    }
+  }
 
-      if (i < segU && j < segV) {
-        const a = i * (segV + 1) + j;
-        const b = (i + 1) * (segV + 1) + j;
-        const c = (i + 1) * (segV + 1) + j + 1;
-        const d = i * (segV + 1) + j + 1;
-        faces.push([a, b, c, d]);
-      }
+  // 5. 面の生成 (インデックスのラッピング)
+  for (let i = 0; i < segU; i++) {
+    if (!closed && i === segU) break;
+    const i0 = i;
+    const i1 = (i + 1) % (closed ? segU : segU + 1);
+    
+    if (!closed && i1 === 0) continue; // 安全策
+
+    for (let j = 0; j < segV; j++) {
+      const j0 = j;
+      const j1 = (j + 1) % segV;
+
+      const a = i0 * numV + j0;
+      const b = i1 * numV + j0;
+      const c = i1 * numV + j1;
+      const d = i0 * numV + j1;
+      faces.push([a, b, c, d]);
     }
   }
 

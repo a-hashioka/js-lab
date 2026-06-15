@@ -23,42 +23,42 @@
   <body>
     <div id="visualizer-container">
       <canvas id="canvas"></canvas>
-    </div>
 
-    <div id="ui-layer">
-      <nav class="top-nav">
-        <a href="index.html" class="back-link">← Gallery</a>
-      </nav>
+      <div id="ui-layer">
+        <nav class="top-nav">
+          <a href="index.html" class="back-link">← Gallery</a>
+        </nav>
 
-      <h1 id="shape-title">Loading...</h1>
+        <h1 id="shape-title">Loading...</h1>
 
-      <button id="info-toggle" aria-label="Show Information">
-        <span class="icon">i</span>
-      </button>
+        <button id="info-toggle" aria-label="Show Information">
+          <span class="icon">i</span>
+        </button>
 
-      <section id="content-section" class="hidden">
-        <div class="info-overlay-content">
-          <div class="info-block">
-            <h3>Description</h3>
-            <div id="shape-desc"></div>
-          </div>
+        <section id="content-section" class="hidden">
+          <div class="info-overlay-content">
+            <div class="info-block">
+              <h3>Description</h3>
+              <div id="shape-desc"></div>
+            </div>
 
-          <div class="info-block" id="formulas-block">
-            <h3>Mathematical Background</h3>
-            <div id="formula-list"></div>
-          </div>
-
-          <div class="info-block">
-            <h3>Navigation</h3>
-            <div class="shape-nav-sidebar">
-              <a id="prev-shape" href="#" class="nav-btn-sidebar">← Previous</a>
-              <span class="nav-sep">|</span>
-              <a id="next-shape" href="#" class="nav-btn-sidebar">Next →</a>
+            <div class="info-block" id="formulas-block">
+              <h3>Mathematical Background</h3>
+              <div id="formula-list"></div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
+
+    <nav id="bottom-nav">
+      <div class="nav-container">
+        <div class="shape-nav">
+          <a id="prev-shape" href="#" class="nav-btn">← Previous</a>
+          <a id="next-shape" href="#" class="nav-btn">Next →</a>
+        </div>
+      </div>
+    </nav>
 
     <script src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.js"></script>
     <script type="module" src="js/viewer.js"></script>

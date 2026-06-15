@@ -169,7 +169,7 @@ function initInput() {
   }
 
   const handleDown = (e) => {
-    if (e.target.closest("#info-toggle, #content-section, .top-nav")) return;
+    if (e.target.closest("#info-toggle, #content-section, #bottom-nav, .top-nav")) return;
     state.isDragging = true;
     const p = e.touches ? e.touches[0] : e;
     state.previousMousePos = { x: p.clientX, y: p.clientY };
