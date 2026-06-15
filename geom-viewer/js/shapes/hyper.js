@@ -14,7 +14,7 @@ export const hyper = {
   ],
   formulas: [
     { label: "Implicit Equation", eq: "x^2 + y^2 - z^2 = 1" },
-    { label: "Gaussian Curvature", eq: "K = -\\\\frac{1}{(x^2 + y^2 + z^2)^2}" },
+    { label: "Gaussian Curvature", eq: "K = -\\frac{1}{(x^2 + y^2 + z^2)^2}" },
   ],
   generate: () =>
     parametric(

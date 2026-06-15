@@ -15,9 +15,9 @@ export const dini = {
   formulas: [
     {
       label: "Parametric Equations",
-      eq: "x = \\\\cos u \\\\sin v, \\\\, y = \\\\sin u \\\\sin v, \\\\, z = \\\\cos v + \\\\ln \\\\tan \\\\frac{v}{2} + bu",
+      eq: "x = \\cos u \\sin v, \\, y = \\sin u \\sin v, \\, z = \\cos v + \\ln \\tan \\frac{v}{2} + bu",
     },
-    { label: "Properties", eq: "K = -1, \\\\, b = 0.15, \\\\, u \\\\in [0, 4\\\\pi]" },
+    { label: "Properties", eq: "K = -1, \\, b = 0.15, \\, u \\in [0, 4\\pi]" },
   ],
   /**
    * ディニ曲面の頂点と面を生成します。

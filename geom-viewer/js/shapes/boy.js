@@ -15,11 +15,11 @@ export const boy = {
   formulas: [
     {
       label: "Parametric (x, y)",
-      eq: "\\\\frac{\\\\sqrt{2}\\\\cos 2u \\\\cos^2 v + \\\\cos u \\\\sin 2v}{2 - \\\\sqrt{2}\\\\sin 3u \\\\sin 2v}, \\\\dots",
+      eq: "\\frac{\\sqrt{2}\\cos 2u \\cos^2 v + \\cos u \\sin 2v}{2 - \\sqrt{2}\\sin 3u \\sin 2v}, \\dots",
     },
     {
       label: "Properties",
-      eq: "\\\\chi = 1, \\\\, \\\\text{Projective Plane Immersion}",
+      eq: "\\chi = 1, \\, \\text{Projective Plane Immersion}",
     },
   ],
   /**

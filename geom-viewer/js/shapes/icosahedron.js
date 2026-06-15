@@ -52,7 +52,7 @@ export const icosahedron = {
   ],
   formulas: [
     { label: "Topology", eq: "V=12, E=30, F=20" },
-    { label: "Dual", eq: "\\\\text{Dodecahedron}" },
+    { label: "Dual", eq: "\\text{Dodecahedron}" },
   ],
   /**
    * 正二十面体の頂点と面を生成します。

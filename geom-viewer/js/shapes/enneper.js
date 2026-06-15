@@ -15,7 +15,7 @@ export const enneper = {
   formulas: [
     {
       label: "Parametric Equations",
-      eq: "x = u - \\\\frac{u^3}{3} + uv^2, \\\\, y = v - \\\\frac{v^3}{3} + vu^2, \\\\, z = u^2 - v^2",
+      eq: "x = u - \\frac{u^3}{3} + uv^2, \\, y = v - \\frac{v^3}{3} + vu^2, \\, z = u^2 - v^2",
     },
     { label: "Mean Curvature", eq: "H = 0" },
   ],

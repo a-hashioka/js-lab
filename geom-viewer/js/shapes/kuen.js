@@ -15,9 +15,9 @@ export const kuen = {
   formulas: [
     {
       label: "Parametric Equations",
-      eq: "x = \\\\frac{2(\\\\cos u + u \\\\sin u) \\\\sin v}{d}, \\\\, y = \\\\frac{2(\\\\sin u - u \\\\cos u) \\\\sin v}{d}, \\\\, z = \\\\ln \\\\tan \\\\frac{v}{2} + \\\\frac{2 \\\\cos v}{d}",
+      eq: "x = \\frac{2(\\cos u + u \\sin u) \\sin v}{d}, \\, y = \\frac{2(\\sin u - u \\cos u) \\sin v}{d}, \\, z = \\ln \\tan \\frac{v}{2} + \\frac{2 \\cos v}{d}",
     },
-    { label: "Properties", eq: "d = 1 + u^2 \\\\sin^2 v, \\\\, K = -1" },
+    { label: "Properties", eq: "d = 1 + u^2 \\sin^2 v, \\, K = -1" },
   ],
   generate: () =>
     parametric(

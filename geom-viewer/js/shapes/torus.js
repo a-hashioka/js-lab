@@ -14,9 +14,9 @@ export const torus = {
   formulas: [
     {
       label: "Parametric",
-      eq: "\\\\begin{cases} x = (R + r\\\\cos v)\\\\cos u \\\\\\\\ y = (R + r\\\\cos v)\\\\sin u \\\\\\\\ z = r\\\\sin v \\\\end{cases}",
+      eq: "\\begin{cases} x = (R + r\\cos v)\\cos u \\\\ y = (R + r\\cos v)\\sin u \\\\ z = r\\sin v \\end{cases}",
     },
-    { label: "Topology", eq: "S^1 \\\\times S^1" },
+    { label: "Topology", eq: "S^1 \\times S^1" },
   ],
   generate: () =>
     parametric(32, 16, (u, v) => {

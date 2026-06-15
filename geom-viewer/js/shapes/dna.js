@@ -14,8 +14,8 @@ export const dna = {
     "The structural model was famously elucidated by James Watson and Francis Crick in 1953, based on X-ray diffraction data from Rosalind Franklin and Maurice Wilkins. Geometrically, it represents a right-handed spiral where two sugar-phosphate backbones are connected by base-pair rungs (Adenine-Thymine and Cytosine-Guanine), illustrating the principle of complementarity.",
   ],
   formulas: [
-    { label: "Parametric Helix", eq: "x = r\\\\cos t, \\\\, y = ht, \\\\, z = r\\\\sin t" },
-    { label: "Parameters", eq: "r=0.15, \\\\, h \\\\approx 0.03, \\\\, \\\\text{rotations}=3.0" },
+    { label: "Parametric Helix", eq: "x = r\\cos t, \\, y = ht, \\, z = r\\sin t" },
+    { label: "Parameters", eq: "r=0.15, \\, h \\approx 0.03, \\, \\text{rotations}=3.0" },
   ],
   generate: () => {
     const v = [],

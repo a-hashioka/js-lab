@@ -19,9 +19,9 @@ export const knot = {
   formulas: [
     {
       label: "Parametric Equations",
-      eq: "x = (1 + r \\\\cos q\\\\phi) \\\\cos p\\\\phi, \\\\, y = (1 + r \\\\cos q\\\\phi) \\\\sin p\\\\phi, \\\\, z = r \\\\sin q\\\\phi",
+      eq: "x = (1 + r \\cos q\\phi) \\cos p\\phi, \\, y = (1 + r \\cos q\\phi) \\sin p\\phi, \\, z = r \\sin q\\phi",
     },
-    { label: "Winding Numbers", eq: "p=3, \\\\, q=2" },
+    { label: "Winding Numbers", eq: "p=3, \\, q=2" },
   ],
   generate: () => {
     const p = 3,

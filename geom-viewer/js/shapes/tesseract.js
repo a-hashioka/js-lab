@@ -14,9 +14,9 @@ export const tesseract = {
     "The concept of higher-dimensional polytopes was pioneered by Ludwig Schläfli in the mid-19th century. The term 'tesseract' was later coined by Charles Howard Hinton in 1888. It has since become a staple of science fiction and mathematical art as a way to contemplate the existence of a fourth spatial dimension.",
   ],
   formulas: [
-    { label: "Vertices", eq: "(\\\\pm 1, \\\\pm 1, \\\\pm 1, \\\\pm 1)" },
-    { label: "3D Projection", eq: "P(x, y, z, w) = \\\\frac{1}{d - w} (x, y, z)" },
-    { label: "Topology", eq: "V=16, \\\\, E=32, \\\\, F=24, \\\\, \\\\text{Cells}=8" },
+    { label: "Vertices", eq: "(\\pm 1, \\pm 1, \\pm 1, \\pm 1)" },
+    { label: "3D Projection", eq: "P(x, y, z, w) = \\frac{1}{d - w} (x, y, z)" },
+    { label: "Topology", eq: "V=16, \\, E=32, \\, F=24, \\, \\text{Cells}=8" },
   ],
   is4D: true,
   generate: () => {

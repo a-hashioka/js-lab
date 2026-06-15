@@ -13,8 +13,8 @@ export const klein = {
     "First described by Felix Klein in 1882, the bottle can be conceptualized as two Möbius strips joined along their boundaries or as a rectangle where opposite sides are glued with a specific twist. Its properties, such as its vanishing Euler characteristic, make it a cornerstone of algebraic topology and the study of non-orientable manifolds.",
   ],
   formulas: [
-    { label: "Topology", eq: "\\\\chi = 0" },
-    { label: "Embedding", eq: "K \\\\to \\\\mathbb{R}^4" },
+    { label: "Topology", eq: "\\chi = 0" },
+    { label: "Embedding", eq: "K \\to \\mathbb{R}^4" },
   ],
   generate: () =>
     parametric(

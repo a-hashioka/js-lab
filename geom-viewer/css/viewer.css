@@ -46,7 +46,7 @@ body {
   min-height: 5rem;
   padding-bottom: env(safe-area-inset-bottom, 1.25rem);
   width: 100%;
-  background: var(--bg);
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -89,7 +89,7 @@ body {
   display: flex;
   align-items: center;
   gap: 2.5rem;
-  pointer-events: auto;
+  pointer-events: none;
 }
 
 .nav-btn {
@@ -99,6 +99,7 @@ body {
   color: var(--fg);
   text-decoration: none;
   transition: opacity 0.2s;
+  pointer-events: auto;
 }
 
 .nav-btn:hover {
