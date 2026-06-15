@@ -32,9 +32,9 @@ html {
 
 main {
   width: 100%;
-  max-width: 800px;
+  max-width: 50rem;
   margin: 0 auto;
-  padding: 60px 20px;
+  padding: 3.75rem 1.25rem;
 }
 
 a {

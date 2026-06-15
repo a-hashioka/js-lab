@@ -7,6 +7,7 @@ import { parametric } from "../utils.js";
 
 export const mobius = {
   title: "Möbius Strip",
+  hideVertices: true,
   desc: [
     "A Möbius strip is a surface with only one side and only one boundary. It is the simplest non-orientable surface. If you travel along the length of the strip, you will return to your starting point but on the 'other' side.",
     "It was discovered independently by August Ferdinand Möbius and Johann Benedict Listing in 1858. It is a classic example in topology, showing how a simple twist can change the fundamental properties of a manifold.",

@@ -7,6 +7,7 @@ import { parametric } from "../utils.js";
 
 export const boy = {
   title: "Boy's Surface",
+  hideVertices: true,
   desc: [
     "Boy's surface is an immersion of the real projective plane in 3-dimensional space. It was discovered by Werner Boy in 1901, solving the problem of finding an immersion of the projective plane without singularities (no sharp points).",
     "Unlike the Roman surface, Boy's surface has no sharp edges or singularities, only self-intersections. It is a highly complex topological object and remains a subject of study in differential geometry.",

@@ -7,6 +7,7 @@ import { parametric } from "../utils.js";
 
 export const hyper = {
   title: "Hyperboloid of One Sheet",
+  hideVertices: true,
   desc: [
     "A hyperboloid of one sheet is a doubly ruled surface, meaning that through every point on the surface, there are two distinct lines that lie entirely on the surface.",
     "This structural property is widely used in architecture and engineering (e.g., cooling towers) as it allows for the construction of curved structures using entirely straight beams. It is a quadric surface defined by an indefinite quadratic form.",

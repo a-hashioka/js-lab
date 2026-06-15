@@ -1,8 +1,8 @@
 #gallery-container {
   display: flex;
   flex-direction: column;
-  gap: 80px;
-  padding-bottom: 100px;
+  gap: 5rem;
+  padding-bottom: calc(6.25rem + env(safe-area-inset-bottom, 1.25rem));
 }
 
 .discipline-section {
@@ -10,9 +10,9 @@
 }
 
 .discipline-header {
-  margin-bottom: 40px;
+  margin-bottom: 2.5rem;
   border-bottom: 1px solid #eee;
-  padding-bottom: 20px;
+  padding-bottom: 1.25rem;
   text-align: left;
 }
 
@@ -20,19 +20,19 @@
   font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: -0.01em;
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
   color: #000;
 }
 
 .discipline-desc {
   font-size: 0.9rem;
   color: var(--muted);
-  max-width: 600px;
+  max-width: 37.5rem;
   line-height: 1.5;
 }
 
 .group-container {
-  margin-bottom: 40px;
+  margin-bottom: 2.5rem;
   text-align: left;
 }
 
@@ -41,16 +41,16 @@
   text-transform: uppercase;
   letter-spacing: 0.15em;
   color: #000;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
   font-weight: 700;
-  border-left: 2px solid #000;
-  padding-left: 12px;
+  border-left: 0.125rem solid #000;
+  padding-left: 0.75rem;
 }
 
 .shape-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px 24px;
+  gap: 0.75rem 1.5rem;
   padding: 0;
   list-style: none;
 }
@@ -73,14 +73,14 @@
   border-bottom-color: #000;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 37.5rem) {
   #gallery-container {
-    gap: 50px;
+    gap: 3.125rem;
   }
 
   .shape-list {
     flex-direction: column;
-    gap: 12px;
+    gap: 0.75rem;
   }
 
   .shape-link {

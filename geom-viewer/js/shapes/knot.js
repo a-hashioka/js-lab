@@ -11,6 +11,7 @@ import { tube } from "../utils.js";
  */
 export const knot = {
   title: "Torus Knot",
+  hideVertices: true,
   desc: [
     "A torus knot is a special kind of knot that lies on the surface of an unknotted torus in three-dimensional space.",
     "This model shows a (3,2) torus knot, which is topologically equivalent to the trefoil knot.",

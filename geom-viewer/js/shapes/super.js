@@ -11,6 +11,7 @@ import { parametric } from "../utils.js";
  */
 export const superShape = {
   title: "Supershape",
+  hideVertices: true,
   desc: [
     "The supershape equation is a generalization of the superellipse, capable of describing a vast range of complex symmetrical shapes found in nature.",
   ],

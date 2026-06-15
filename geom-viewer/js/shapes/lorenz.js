@@ -10,6 +10,7 @@
  */
 export const lorenz = {
   title: "Lorenz Attractor",
+  hideVertices: true,
   desc: [
     "The Lorenz attractor is a set of chaotic solutions of the Lorenz system. It is one of the most famous examples of a strange attractor.",
   ],

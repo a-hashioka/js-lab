@@ -7,6 +7,7 @@ import { parametric } from "../utils.js";
 
 export const roman = {
   title: "Roman Surface",
+  hideVertices: true,
   desc: [
     "The Roman surface (also known as the Steiner surface) is a self-intersecting immersion of the real projective plane into three-dimensional space. It features high symmetry including six pinch points (Whitney singularities).",
     "It is named after Jakob Steiner, who discovered it during a stay in Rome. It is related to Boy's surface but differs in that it possesses specific singularities. It provides a visual means to understand the complex topology of the projective plane.",

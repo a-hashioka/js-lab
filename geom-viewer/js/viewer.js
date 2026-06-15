@@ -97,6 +97,9 @@ function loadShape() {
   updateNavigation(id);
 
   state.shapeData = state.shapeObj.generate();
+  if (state.shapeObj.hideVertices) {
+    state.shapeData.hideVertices = true;
+  }
   state.dynamicCounter = 0;
 
   // テキストコンテンツの更新
@@ -169,7 +172,10 @@ function initInput() {
   }
 
   const handleDown = (e) => {
-    if (e.target.closest("#info-toggle, #content-section, #bottom-nav, .top-nav")) return;
+    if (
+      e.target.closest("#info-toggle, #content-section, #bottom-nav, .top-nav")
+    )
+      return;
     state.isDragging = true;
     const p = e.touches ? e.touches[0] : e;
     state.previousMousePos = { x: p.clientX, y: p.clientY };
@@ -218,6 +224,9 @@ function updateDynamicState() {
     state.shapeData = state.shapeObj.generate(
       Math.min(state.dynamicCounter, 3000),
     );
+    if (state.shapeObj.hideVertices) {
+      state.shapeData.hideVertices = true;
+    }
   }
 
   // ドラッグ中ではない時の自動回転

@@ -11,6 +11,7 @@ import { parametric } from "../utils.js";
  */
 export const calabi = {
   title: "Calabi-Yau Manifold",
+  hideVertices: true,
   desc: [
     "Calabi-Yau manifolds are special complex manifolds that play a central role in string theory.",
   ],

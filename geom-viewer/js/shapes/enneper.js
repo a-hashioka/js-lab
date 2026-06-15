@@ -7,6 +7,7 @@ import { parametric } from "../utils.js";
 
 export const enneper = {
   title: "Enneper Surface",
+  hideVertices: true,
   desc: [
     "The Enneper surface is a self-intersecting minimal surface first described by Alfred Enneper in 1864. A minimal surface is a surface that locally minimizes its area, which is equivalent to having zero mean curvature everywhere.",
     "Although defined by mathematically elegant and simple polynomial functions, it cannot exist as a physical model of a soap film beyond local regions because it self-intersects globally.",

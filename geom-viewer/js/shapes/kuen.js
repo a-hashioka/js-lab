@@ -7,6 +7,7 @@ import { parametric } from "../utils.js";
 
 export const kuen = {
   title: "Kuen Surface",
+  hideVertices: true,
   desc: [
     "The Kuen surface is a famous example of a surface with constant negative Gaussian curvature. It is characterized by complex and very beautiful self-intersections.",
     "It belongs to the family of pseudospherical surfaces. Unlike a sphere, which has constant positive curvature, the Kuen surface illustrates properties of hyperbolic geometry in a visual 3D context.",

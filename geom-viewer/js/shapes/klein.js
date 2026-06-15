@@ -7,6 +7,7 @@ import { parametric } from "../utils.js";
 
 export const klein = {
   title: "Klein Bottle",
+  hideVertices: true,
   desc: [
     "The Klein bottle is a non-orientable closed surface with no boundary. It cannot be embedded in three-dimensional space without self-intersection. It is a 2D manifold where a normal vector cannot be consistently defined.",
     "Mathematically, it can be thought of as two Möbius strips joined along their boundaries. In four-dimensional space, it can be closed without self-intersection, becoming a 'closed' surface like a sphere, but with very different topological properties.",
