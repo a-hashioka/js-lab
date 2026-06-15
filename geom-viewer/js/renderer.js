@@ -15,7 +15,7 @@
  * @param {number} viewDist - 視点からオブジェクトまでの距離。
  * @param {number} w - キャンバスの幅。
  * @param {number} h - キャンバスの高さ。
- * @returns {Object} スクリーン座標と奥行きに基づくスケール係数 {x, y, scale}。
+ * @returns {Object} スクリーン座標と奥行きに基づくスケール係 {x, y, scale}。
  */
 export const project = (v, scale, rotX, rotY, rotZ, fov, viewDist, w, h) => {
   // Y軸周りの回転
@@ -97,9 +97,14 @@ export const draw = (ctx, data, projected, w, h) => {
         const p = projected[face[i]];
         if (p) ctx.lineTo(p.x, p.y);
       }
-      ctx.closePath();
-      ctx.fill();
-      ctx.stroke();
+      
+      if (face.length > 2) {
+        ctx.closePath();
+        ctx.fill();
+        if (!data.hideEdges) ctx.stroke();
+      } else if (!data.hideEdges) {
+        ctx.stroke();
+      }
     }
   });
 

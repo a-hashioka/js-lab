@@ -218,8 +218,15 @@ function resize() {
  * 特定の形状（Lorenz、Tesseract）の動的なプロパティを更新します。
  */
 function updateDynamicState() {
-  // Lorenz Attractor: 段階的な成長
-  if (state.currentId === "lorenz" && state.dynamicCounter < 3000) {
+  // 形状特有の動的更新
+  if (state.shapeObj.isDynamic) {
+    state.dynamicCounter++;
+    state.shapeData = state.shapeObj.generate(state.dynamicCounter);
+    if (state.shapeObj.hideVertices) {
+      state.shapeData.hideVertices = true;
+    }
+  } else if (state.currentId === "lorenz" && state.dynamicCounter < 3000) {
+    // Lorenz Attractor: 段階的な成長
     state.dynamicCounter += 7;
     state.shapeData = state.shapeObj.generate(
       Math.min(state.dynamicCounter, 3000),

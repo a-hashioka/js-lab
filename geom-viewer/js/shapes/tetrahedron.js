@@ -5,6 +5,13 @@
 
 import { normalize } from "../utils.js";
 
+export const TETRA_VERTICES = [
+  { x: 1, y: 1, z: 1 },
+  { x: 1, y: -1, z: -1 },
+  { x: -1, y: 1, z: -1 },
+  { x: -1, y: -1, z: 1 },
+].map(normalize);
+
 export const tetrahedron = {
   title: "Tetrahedron",
   desc: [
@@ -24,12 +31,7 @@ export const tetrahedron = {
    * @returns {Object} {vertices, faces}
    */
   generate: () => ({
-    vertices: [
-      { x: 1, y: 1, z: 1 },
-      { x: 1, y: -1, z: -1 },
-      { x: -1, y: 1, z: -1 },
-      { x: -1, y: -1, z: 1 },
-    ].map(normalize),
+    vertices: TETRA_VERTICES,
     faces: [
       [0, 1, 2],
       [0, 2, 3],
