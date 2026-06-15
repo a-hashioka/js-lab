@@ -14,15 +14,10 @@ export const mobius = {
   ],
   formulas: [
     {
-      label: "Parametric Equations",
-      eq: "\\\\begin{cases} x = (1 + \\\\frac{v}{2} \\\\cos \\\\frac{u}{2}) \\\\cos u \\\\\\\\ y = (1 + \\\\frac{v}{2} \\\\cos \\\\frac{u}{2}) \\\\sin u \\\\\\\\ z = \\\\frac{v}{2} \\\\sin \\\\frac{u}{2} \\\\end{cases}",
+      label: "Parametric",
+      eq: "\\\\begin{cases} x = (1 + \\\\frac{v}{2}\\\\cos\\\\frac{u}{2})\\\\cos u \\\\\\\\ y = (1 + \\\\frac{v}{2}\\\\cos\\\\frac{u}{2})\\\\sin u \\\\\\\\ z = \\\\frac{v}{2}\\\\sin\\\\frac{u}{2} \\\\end{cases}",
     },
-    { label: "Euler Characteristic", eq: "\\\\chi = 0" },
-    {
-      label: "Symbols",
-      eq: "u \\\\in [0, 2\\\\pi] \\\\text{ (angle)}, v \\\\in [-w, w] \\\\text{ (width)}",
-    },
-    { label: "Parameters", eq: "R = 1, w = 0.5" },
+    { label: "Properties", eq: "\\\\chi = 0, \\\\, \\\\text{Non-orientable}" },
   ],
   generate: () =>
     parametric(64, 10, (u, v) => {

@@ -15,14 +15,9 @@ export const dini = {
   formulas: [
     {
       label: "Parametric Equations",
-      eq: "\\\\begin{cases} x = a\\\\cos u\\\\sin v \\\\\\\\ y = a\\\\sin u\\\\sin v \\\\\\\\ z = a(\\\\cos v + \\\\ln(\\\\tan\\\\frac{v}{2})) + bu \\\\end{cases}",
+      eq: "x = \\\\cos u \\\\sin v, \\\\, y = \\\\sin u \\\\sin v, \\\\, z = \\\\cos v + \\\\ln \\\\tan \\\\frac{v}{2} + bu",
     },
-    { label: "Gaussian Curvature", eq: "K = -\\\\frac{1}{a^2}" },
-    {
-      label: "Symbols",
-      eq: "u \\\\in [0, 4\\\\pi], \\\\quad v \\\\in (0, \\\\pi), \\\\quad a: \\\\text{radius}, \\\\quad b: \\\\text{twist factor}",
-    },
-    { label: "Parameters", eq: "a = 1.0, \\\\quad b = 0.15, \\\\quad s = 0.3" },
+    { label: "Properties", eq: "K = -1, \\\\, b = 0.15, \\\\, u \\\\in [0, 4\\\\pi]" },
   ],
   /**
    * ディニ曲面の頂点と面を生成します。

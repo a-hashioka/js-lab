@@ -12,17 +12,8 @@ export const tetrahedron = {
     "Described by Plato as the geometric representation of the element Fire due to its sharp points and simplicity. It is a fundamental building block in chemistry and structural engineering, forming the basis for the silicon-oxygen tetrahedron in silicates and the molecular geometry of sp^3 hybridized carbon.",
   ],
   formulas: [
-    {
-      label: "Unit Vertices",
-      eq: "(1,1,1), (1,-1,-1), (-1,1,-1), (-1,-1,1)",
-    },
-    { label: "Volume", eq: "V = \\\\frac{a^3}{6\\\\sqrt{2}}" },
-    { label: "Surface Area", eq: "S = \\\\sqrt{3} a^2" },
-    {
-      label: "Dihedral Angle",
-      eq: "\\\\theta = \\\\arccos(1/3) \\\\approx 70.53^\\\\circ",
-    },
-    { label: "Symbols", eq: "a \\\\text{ is the edge length}" },
+    { label: "Topology", eq: "V=4, E=6, F=4" },
+    { label: "Dihedral Angle", eq: "\\\\arccos(1/3) \\\\approx 70.53^\\\\circ" },
   ],
   /**
    * 正四面体の頂点と面を生成します。

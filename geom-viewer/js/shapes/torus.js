@@ -13,20 +13,10 @@ export const torus = {
   ],
   formulas: [
     {
-      label: "Parametric Equations",
-      eq: "\\\\begin{cases} x = (R + r \\\\cos v) \\\\cos u \\\\\\\\ y = (R + r \\\\cos v) \\\\sin u \\\\\\\\ z = r \\\\sin v \\\\end{cases}",
+      label: "Parametric",
+      eq: "\\\\begin{cases} x = (R + r\\\\cos v)\\\\cos u \\\\\\\\ y = (R + r\\\\cos v)\\\\sin u \\\\\\\\ z = r\\\\sin v \\\\end{cases}",
     },
-    {
-      label: "Implicit Equation",
-      eq: "(\\\\sqrt{x^2 + y^2} - R)^2 + z^2 = r^2",
-    },
-    { label: "Volume", eq: "V = 2 \\\\pi^2 R r^2" },
-    { label: "Surface Area", eq: "S = 4 \\\\pi^2 R r" },
-    {
-      label: "Symbols",
-      eq: "R \\\\text{ (major radius)}, r \\\\text{ (minor radius)}",
-    },
-    { label: "Parameters", eq: "u, v \\\\in [0, 2\\\\pi]" },
+    { label: "Topology", eq: "S^1 \\\\times S^1" },
   ],
   generate: () =>
     parametric(32, 16, (u, v) => {

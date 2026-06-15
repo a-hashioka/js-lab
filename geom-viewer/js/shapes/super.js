@@ -17,19 +17,8 @@ export const superShape = {
     "The formula was proposed by the Belgian biologist Johan Gielis in 2003. He suggested that many complex biological forms in nature, such as the cross-sections of plant stems or the shells of mollusks, could be described mathematically using this single unified equation.",
   ],
   formulas: [
-    {
-      label: "Gielis Formula",
-      eq: "r(\\\\theta) = \\\\left[ \\\\left| \\\\frac{\\\\cos(\\\\frac{m\\\\theta}{4})}{a} \\\\right|^{n_2} + \\\\left| \\\\frac{\\\\sin(\\\\frac{m\\\\theta}{4})}{b} \\\\right|^{n_3} \\\\right]^{-\\\\frac{1}{n_1}}",
-    },
-    {
-      label: "3D Parametric Mapping",
-      eq: "\\\\begin{cases} x = r_1(\\\\theta) \\\\cos \\\\theta \\\\cdot r_2(\\\\phi) \\\\cos \\\\phi \\\\\\\\ y = r_1(\\\\theta) \\\\sin \\\\theta \\\\cdot r_2(\\\\phi) \\\\cos \\\\phi \\\\\\\\ z = r_2(\\\\phi) \\\\sin \\\\phi \\\\end{cases}",
-    },
-    {
-      label: "Symbols",
-      eq: "\\\\theta, \\\\phi \\\\text{ (angles)}; m, n_1, n_2, n_3 \\\\text{ (shape)}; a, b \\\\text{ (scale)}",
-    },
-    { label: "Parameters", eq: "m=5, n_1=1, n_2=1, n_3=1" },
+    { label: "Gielis Formula", eq: "r(\\\\theta) = \\\\left( |\\\\cos \\\\frac{m\\\\theta}{4}|^{n_2} + |\\\\sin \\\\frac{m\\\\theta}{4}|^{n_3} \\\\right)^{-1/n_1}" },
+    { label: "Shape Parameters", eq: "m=5, \\\\, n_1=1, \\\\, n_2=1, \\\\, n_3=1" },
   ],
   generate: () => {
     const m = 5,

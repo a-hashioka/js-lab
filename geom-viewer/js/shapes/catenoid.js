@@ -13,17 +13,8 @@ export const catenoid = {
     "Discovered by Leonhard Euler in 1744, the catenoid is a fundamental object in differential geometry. It is locally isometric to the helicoid, meaning it can be continuously deformed into a spiral surface without stretching or tearing, a transformation that preserves the surface's minimal property.",
   ],
   formulas: [
-    { label: "Implicit Equation", eq: "\\\\sqrt{x^2 + y^2} = c \\\\cosh(z/c)" },
-    { label: "Mean Curvature", eq: "H = 0" },
-    {
-      label: "Gaussian Curvature",
-      eq: "K = -\\\\frac{1}{c^2 \\\\cosh^4(z/c)}",
-    },
-    {
-      label: "Symbols",
-      eq: "u \\\\in [0, 2\\\\pi), \\\\quad v \\\\in [-1.2, 1.2], \\\\quad c: \\\\text{scaling constant}",
-    },
-    { label: "Parameters", eq: "c = 0.5, \\\\quad s = 0.55" },
+    { label: "Implicit Equation", eq: "\\\\sqrt{x^2 + y^2} = \\\\cosh z" },
+    { label: "Curvatures", eq: "H = 0, \\\\, K = -\\\\text{sech}^4 z" },
   ],
   /**
    * カテノイドの頂点と面を生成します。

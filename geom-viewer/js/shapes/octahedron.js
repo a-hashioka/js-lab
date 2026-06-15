@@ -10,14 +10,8 @@ export const octahedron = {
     "Known since antiquity, it was described by Plato in the 'Timaeus' as representing the element of Air. In crystallography, it is a common form for various minerals, such as diamond and fluorite, due to their cubic crystal systems.",
   ],
   formulas: [
-    { label: "Implicit Representation", eq: "|x| + |y| + |z| = a" },
-    { label: "Volume", eq: "V = \\\\frac{\\\\sqrt{2}}{3} a^3" },
-    { label: "Surface Area", eq: "S = 2\\\\sqrt{3} a^2" },
-    { label: "Symbols", eq: "a \\\\text{ is the edge length}" },
-    {
-      label: "Parameters",
-      eq: "\\\\text{Vertices at } (\\\\pm 1, 0, 0), (0, \\\\pm 1, 0), (0, 0, \\\\pm 1)",
-    },
+    { label: "Topology", eq: "V=6, E=12, F=8" },
+    { label: "Implicit", eq: "|x| + |y| + |z| = 1" },
   ],
   /**
    * 正八面体の頂点と面を生成します。

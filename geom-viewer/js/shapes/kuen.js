@@ -15,14 +15,9 @@ export const kuen = {
   formulas: [
     {
       label: "Parametric Equations",
-      eq: "\\\\begin{cases} x = \\\\frac{2(\\\\cos u + u \\\\sin u) \\\\sin v}{1 + u^2 \\\\sin^2 v} \\\\\\\\ y = \\\\frac{2(\\\\sin u - u \\\\cos u) \\\\sin v}{1 + u^2 \\\\sin^2 v} \\\\\\\\ z = \\\\ln(\\\\tan \\\\frac{v}{2}) + \\\\frac{2 \\\\cos v}{1 + u^2 \\\\sin^2 v} \\\\end{cases}",
+      eq: "x = \\\\frac{2(\\\\cos u + u \\\\sin u) \\\\sin v}{d}, \\\\, y = \\\\frac{2(\\\\sin u - u \\\\cos u) \\\\sin v}{d}, \\\\, z = \\\\ln \\\\tan \\\\frac{v}{2} + \\\\frac{2 \\\\cos v}{d}",
     },
-    { label: "Gaussian Curvature", eq: "K = -1" },
-    { label: "Symbols", eq: "u, v \\\\text{ are parameters}" },
-    {
-      label: "Parameters",
-      eq: "u \\\\in [-4.5, 4.5], v \\\\in (0, \\\\pi)",
-    },
+    { label: "Properties", eq: "d = 1 + u^2 \\\\sin^2 v, \\\\, K = -1" },
   ],
   generate: () =>
     parametric(

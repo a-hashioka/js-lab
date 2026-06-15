@@ -19,16 +19,9 @@ export const knot = {
   formulas: [
     {
       label: "Parametric Equations",
-      eq: "\\\\begin{cases} x = (R + r\\\\cos q\\\\phi)\\\\cos p\\\\phi \\\\\\\\ y = (R + r\\\\cos q\\\\phi)\\\\sin p\\\\phi \\\\\\\\ z = r\\\\sin q\\\\phi \\\\end{cases}",
+      eq: "x = (1 + r \\\\cos q\\\\phi) \\\\cos p\\\\phi, \\\\, y = (1 + r \\\\cos q\\\\phi) \\\\sin p\\\\phi, \\\\, z = r \\\\sin q\\\\phi",
     },
-    {
-      label: "Symbols",
-      eq: "p, q: \\\\text{winding numbers}, \\\\quad \\\\phi: \\\\text{angle}, \\\\quad R: \\\\text{major radius}, \\\\quad r: \\\\text{minor radius}",
-    },
-    {
-      label: "Parameters",
-      eq: "p = 3, \\\\quad q = 2, \\\\quad R = 0.7, \\\\quad r = 0.2",
-    },
+    { label: "Winding Numbers", eq: "p=3, \\\\, q=2" },
   ],
   generate: () => {
     const p = 3,

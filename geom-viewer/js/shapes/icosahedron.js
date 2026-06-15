@@ -51,13 +51,8 @@ export const icosahedron = {
     "In the Platonic tradition, the icosahedron was associated with the element of 'Water' due to its fluid-like, nearly spherical appearance. In modern science, its structure is a fundamental model for viral capsids (the protein shells of viruses) and geodesic domes, providing a highly efficient way to enclose a volume with minimal surface area.",
   ],
   formulas: [
-    { label: "Volume", eq: "V = \\\\frac{5(3 + \\\\sqrt{5})}{12} a^3" },
-    { label: "Surface Area", eq: "A = 5\\\\sqrt{3} a^2" },
-    { label: "Euler Characteristic", eq: "\\\\chi = V - E + F = 2" },
-    {
-      label: "Symbols",
-      eq: "a: \\\\text{edge length}, \\\\quad V: \\\\text{vertices}, \\\\quad E: \\\\text{edges}, \\\\quad F: \\\\text{faces}",
-    },
+    { label: "Topology", eq: "V=12, E=30, F=20" },
+    { label: "Dual", eq: "\\\\text{Dodecahedron}" },
   ],
   /**
    * 正二十面体の頂点と面を生成します。

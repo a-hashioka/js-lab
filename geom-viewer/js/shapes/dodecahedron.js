@@ -13,14 +13,8 @@ export const dodecahedron = {
     "In Plato's cosmology, the dodecahedron was associated with the 'Aether' or the universe as a whole, representing the divine quintessence. Its geometry appears in various natural contexts, from the structure of certain viruses to the proposed models of the shape of the universe, such as the Poincaré dodecahedral space.",
   ],
   formulas: [
-    { label: "Volume", eq: "V = \\\\frac{15 + 7\\\\sqrt{5}}{4} a^3" },
-    { label: "Surface Area", eq: "A = 3\\\\sqrt{25 + 10\\\\sqrt{5}} a^2" },
-    { label: "Golden Ratio", eq: "\\\\phi = \\\\frac{1 + \\\\sqrt{5}}{2}" },
-    {
-      label: "Symbols",
-      eq: "a: \\\\text{edge length}, \\\\quad \\\\phi: \\\\text{golden ratio}, \\\\quad V: \\\\text{vertices}, \\\\quad E: \\\\text{edges}, \\\\quad F: \\\\text{faces}",
-    },
-    { label: "Parameters", eq: "\\\\phi \\\\approx 1.618" },
+    { label: "Topology", eq: "V=20, E=30, F=12" },
+    { label: "Symmetry", eq: "I_h" },
   ],
   /**
    * 正十二面体の頂点と面を生成します。

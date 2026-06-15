@@ -10,14 +10,8 @@ export const cube = {
     "In Plato's Timaeus, the cube was associated with the element of 'Earth' due to its stability and ability to tile space (tessellation). It is the dual of the regular octahedron and serves as the basis for the Cartesian coordinate system, representing the volume of three-dimensional space in its simplest form.",
   ],
   formulas: [
-    { label: "Volume", eq: "V = a^3" },
-    { label: "Surface Area", eq: "A = 6a^2" },
-    { label: "Euler Characteristic", eq: "\\\\chi = V - E + F = 2" },
-    {
-      label: "Symbols",
-      eq: "a: \\\\text{side length}, \\\\quad V: \\\\text{vertices}, \\\\quad E: \\\\text{edges}, \\\\quad F: \\\\text{faces}",
-    },
-    { label: "Parameters", eq: "s = 1/\\\\sqrt{3} \\\\text{ (normalization)}" },
+    { label: "Topology", eq: "V=8, E=12, F=6" },
+    { label: "Euler Characteristic", eq: "\\\\chi = 2" },
   ],
   /**
    * 立方体の頂点と面を生成します。

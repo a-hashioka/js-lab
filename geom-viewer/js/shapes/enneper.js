@@ -15,14 +15,9 @@ export const enneper = {
   formulas: [
     {
       label: "Parametric Equations",
-      eq: "\\\\begin{cases} x = u - \\\\frac{u^3}{3} + uv^2 \\\\\\\\ y = v - \\\\frac{v^3}{3} + vu^2 \\\\\\\\ z = u^2 - v^2 \\\\end{cases}",
+      eq: "x = u - \\\\frac{u^3}{3} + uv^2, \\\\, y = v - \\\\frac{v^3}{3} + vu^2, \\\\, z = u^2 - v^2",
     },
     { label: "Mean Curvature", eq: "H = 0" },
-    {
-      label: "Symbols",
-      eq: "u, v: \\\\text{parameters}, \\\\quad x, y, z: \\\\text{coordinates}",
-    },
-    { label: "Parameters", eq: "s = 0.18" },
   ],
   /**
    * エンネパー曲面の頂点と面を生成します。

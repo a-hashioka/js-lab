@@ -15,16 +15,8 @@ export const tesseract = {
   ],
   formulas: [
     { label: "Vertices", eq: "(\\\\pm 1, \\\\pm 1, \\\\pm 1, \\\\pm 1)" },
-    { label: "Hypervolume", eq: "V_{4D} = a^4" },
-    {
-      label: "3D Projection",
-      eq: "P(x, y, z, w) = \\\\frac{1}{d - w} (x, y, z)",
-    },
-    {
-      label: "Symbols",
-      eq: "a \\\\text{ (side)}; w \\\\text{ (4th coord)}; d \\\\text{ (camera dist)}",
-    },
-    { label: "Parameters", eq: "\\\\text{Dimension } n=4" },
+    { label: "3D Projection", eq: "P(x, y, z, w) = \\\\frac{1}{d - w} (x, y, z)" },
+    { label: "Topology", eq: "V=16, \\\\, E=32, \\\\, F=24, \\\\, \\\\text{Cells}=8" },
   ],
   is4D: true,
   generate: () => {

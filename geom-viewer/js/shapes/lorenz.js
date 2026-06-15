@@ -18,13 +18,9 @@ export const lorenz = {
   formulas: [
     {
       label: "Lorenz System",
-      eq: "\\\\begin{cases} \\\\frac{dx}{dt} = \\\\sigma (y - x) \\\\\\\\ \\\\frac{dy}{dt} = x (\\\\rho - z) - y \\\\\\\\ \\\\frac{dz}{dt} = xy - \\\\beta z \\\\end{cases}",
+      eq: "\\\\dot{x} = \\\\sigma (y - x), \\\\, \\\\dot{y} = x (\\\\rho - z) - y, \\\\, \\\\dot{z} = xy - \\\\beta z",
     },
-    {
-      label: "Symbols",
-      eq: "x, y, z \\\\text{ are coordinates}; \\\\sigma, \\\\rho, \\\\beta \\\\text{ are system parameters}",
-    },
-    { label: "Parameters", eq: "\\\\sigma=10, \\\\rho=28, \\\\beta=8/3" },
+    { label: "Chaotic Parameters", eq: "\\\\sigma=10, \\\\, \\\\rho=28, \\\\, \\\\beta=8/3" },
   ],
   generate: (limit = 3000) => {
     const v = [];

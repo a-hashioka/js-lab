@@ -17,19 +17,8 @@ export const calabi = {
     "Named after Eugenio Calabi and Shing-Tung Yau, these spaces represent a profound intersection of algebraic geometry and theoretical physics. This visualization shows a 3D projection of a quintic threefold (a Fermat quintic), revealing the intricate, non-trivial topology required to maintain supersymmetry in multidimensional models.",
   ],
   formulas: [
-    { label: "Fermat Quintic", eq: "z_1^n + z_2^n + \\\\dots + z_{m+1}^n = 0" },
-    {
-      label: "Parametrization",
-      eq: "z_1 = e^{i\\\\theta} \\\\cos(2\\\\phi/n), \\\\quad z_2 = e^{i\\\\theta} \\\\sin(2\\\\phi/n)",
-    },
-    {
-      label: "Symbols",
-      eq: "z_i: \\\\text{complex coordinates}, \\\\quad n: \\\\text{degree}, \\\\quad \\\\phi, \\\\theta: \\\\text{angles}",
-    },
-    {
-      label: "Parameters",
-      eq: "n = 5, \\\\quad \\\\alpha = 0.5, \\\\quad s = 0.8",
-    },
+    { label: "Fermat Quintic", eq: "\\\\sum_{i=1}^3 z_i^n = 0" },
+    { label: "Shape Parameters", eq: "n = 5, \\\\, z_i \\\\in \\\\mathbb{C}" },
   ],
   generate: () => {
     const v = [],

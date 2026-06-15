@@ -13,16 +13,11 @@ export const roman = {
     "It was discovered by the Swiss mathematician Jakob Steiner in 1844 while he was visiting Rome, hence its name. Unlike Boy's surface, which is an immersion without singularities, the Roman surface is an easier-to-parameterize but singular representation of the projective plane.",
   ],
   formulas: [
-    {
-      label: "Implicit Equation",
-      eq: "x^2 y^2 + y^2 z^2 + z^2 x^2 + r x y z = 0",
-    },
+    { label: "Implicit Equation", eq: "x^2 y^2 + y^2 z^2 + z^2 x^2 + xyz = 0" },
     {
       label: "Parametric Equations",
-      eq: "\\\\begin{cases} x = \\\\sin 2u \\\\cos^2 v \\\\\\\\ y = \\\\sin u \\\\sin 2v \\\\\\\\ z = \\\\cos u \\\\sin 2v \\\\end{cases}",
+      eq: "x = \\\\sin 2u \\\\cos^2 v, \\\\, y = \\\\sin u \\\\sin 2v, \\\\, z = \\\\cos u \\\\sin 2v",
     },
-    { label: "Symbols", eq: "u \\\\in [0, \\\\pi], v \\\\in [0, \\\\pi/2]" },
-    { label: "Parameters", eq: "r \\\\text{ (scale factor)}" },
   ],
   generate: () =>
     parametric(

@@ -13,14 +13,8 @@ export const bucky = {
     "This geometry is named after R. Buckminster Fuller, whose geodesic domes share similar structural principles. It is the standard shape of a soccer ball and is central to the field of nanotechnology and carbon science, where it represents a bridge between discrete mathematics and physical chemistry.",
   ],
   formulas: [
-    { label: "Vertices", eq: "V = 60" },
-    { label: "Edges", eq: "E = 90" },
-    { label: "Faces", eq: "F = 32 \\\\text{ (12 pentagons, 20 hexagons)}" },
+    { label: "Topology", eq: "V=60, \\\\, E=90, \\\\, F=32 \\\\text{ (12 pentagons, 20 hexagons)}" },
     { label: "Euler Characteristic", eq: "\\\\chi = V - E + F = 2" },
-    {
-      label: "Symbols",
-      eq: "V: \\\\text{vertices}, \\\\quad E: \\\\text{edges}, \\\\quad F: \\\\text{faces}",
-    },
   ],
   /**
    * バッキーボール（切頂二十面体）の頂点と面を生成します。

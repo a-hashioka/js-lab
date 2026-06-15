@@ -14,25 +14,12 @@ export const boy = {
   ],
   formulas: [
     {
-      label: "Parametric Equations (Apéry)",
-      eq: "x = \\\\frac{\\\\sqrt{2}\\\\cos(2u)\\\\cos^2(v) + \\\\cos(u)\\\\sin(2v)}{2 - \\\\sqrt{2}\\\\sin(3u)\\\\sin(2v)}",
+      label: "Parametric (x, y)",
+      eq: "\\\\frac{\\\\sqrt{2}\\\\cos 2u \\\\cos^2 v + \\\\cos u \\\\sin 2v}{2 - \\\\sqrt{2}\\\\sin 3u \\\\sin 2v}, \\\\dots",
     },
     {
-      label: "y-component",
-      eq: "y = \\\\frac{\\\\sqrt{2}\\\\sin(2u)\\\\cos^2(v) - \\\\sin(u)\\\\sin(2v)}{2 - \\\\sqrt{2}\\\\sin(3u)\\\\sin(2v)}",
-    },
-    {
-      label: "z-component",
-      eq: "z = \\\\frac{3\\\\cos^2(v)}{2 - \\\\sqrt{2}\\\\sin(3u)\\\\sin(2v)} - 1.25",
-    },
-    { label: "Euler Characteristic", eq: "\\\\chi = 1" },
-    {
-      label: "Symbols",
-      eq: "u \\\\in [0, \\\\pi], \\\\quad v \\\\in [0, \\\\pi], \\\\quad x, y, z: \\\\text{coordinates}",
-    },
-    {
-      label: "Parameters",
-      eq: "d = 2 - \\\\sqrt{2}\\\\sin(3u)\\\\sin(2v), \\\\quad s = 0.5",
+      label: "Properties",
+      eq: "\\\\chi = 1, \\\\, \\\\text{Projective Plane Immersion}",
     },
   ],
   /**

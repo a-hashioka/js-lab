@@ -34,12 +34,8 @@ export const sphere = {
     "Spherical geometry has been studied since the time of the ancient Greeks, with Euclid and Archimedes defining its properties. It is the fundamental shape of celestial bodies under gravity and serves as the basis for global coordinate systems and non-Euclidean elliptic geometry.",
   ],
   formulas: [
-    { label: "Implicit Equation", eq: "x^2 + y^2 + z^2 = r^2" },
-    { label: "Volume", eq: "V = \\\\frac{4}{3} \\\\pi r^3" },
-    { label: "Surface Area", eq: "S = 4 \\\\pi r^2" },
-    { label: "Gaussian Curvature", eq: "K = \\\\frac{1}{r^2}" },
-    { label: "Symbols", eq: "r \\\\text{ is the radius}" },
-    { label: "Parameters", eq: "n \\\\text{ (subdivisions)}" },
+    { label: "Implicit Equation", eq: "x^2 + y^2 + z^2 = 1" },
+    { label: "Gaussian Curvature", eq: "K = 1" },
   ],
   generate: () => icosphere(2, 0.8),
 };
