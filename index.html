@@ -8,14 +8,18 @@
       :root {
         --bg: #ffffff;
         --fg: #1a1a1a;
-        --muted: #888;
+        --secondary: #717171;
+        --muted: #a3a3a3;
+        --border: #e5e5e5;
       }
 
       @media (prefers-color-scheme: dark) {
         :root {
           --bg: #0a0a0a;
-          --fg: #eeeeee;
-          --muted: #666;
+          --fg: #e5e5e5;
+          --secondary: #a3a3a3;
+          --muted: #525252;
+          --border: #262626;
         }
       }
 
@@ -24,59 +28,49 @@
           "Inter",
           -apple-system,
           BlinkMacSystemFont,
-          "Segoe UI",
-          Roboto,
           sans-serif;
         background-color: var(--bg);
         color: var(--fg);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
         margin: 0;
-        padding: 40px 20px;
+        padding: 60px 24px;
         -webkit-font-smoothing: antialiased;
       }
 
       main {
-        width: 100%;
-        max-width: 480px;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      header {
+        margin-bottom: 80px;
       }
 
       h1 {
-        font-size: 0.85rem;
+        font-size: 1.75rem;
         font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.2em;
-        margin-bottom: 4rem;
-        color: var(--muted);
+        letter-spacing: -0.02em;
+        margin: 0;
+        color: var(--fg);
+      }
+
+      .subtitle {
+        display: block;
+        font-size: 0.8rem;
+        font-weight: 400;
+        letter-spacing: 0.05em;
+        margin-top: 8px;
+        color: var(--secondary);
       }
 
       nav ul {
         list-style: none;
         padding: 0;
+        margin: 0;
       }
 
       nav li {
-        display: flex;
-        align-items: baseline;
-        margin-bottom: 1.5rem;
-        padding-bottom: 0.5rem;
-        border-bottom: 1px solid transparent;
-        transition: border-color 0.3s ease;
-      }
-
-      nav li:hover {
-        border-bottom-color: var(--fg);
-      }
-
-      .index {
-        font-size: 0.75rem;
-        font-family:
-          ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-        color: var(--muted);
-        margin-right: 1.5rem;
-        width: 1.5rem;
+        margin-bottom: 40px;
+        position: relative;
       }
 
       nav a {
@@ -85,22 +79,21 @@
         font-size: 1.25rem;
         font-weight: 400;
         letter-spacing: -0.01em;
-        transition: transform 0.2s ease;
-        display: inline-block;
-      }
-
-      nav li:hover a {
-        transform: translateX(4px);
+        display: block;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border);
       }
     </style>
   </head>
   <body>
     <main>
-      <h1>JS Lab</h1>
+      <header>
+        <h1>JS Lab</h1>
+        <span class="subtitle">A collection of web experiments.</span>
+      </header>
       <nav>
         <ul>
           <li>
-            <span class="index">01</span>
             <a href="geom-viewer/index.html">Geometry Viewer</a>
           </li>
           <!-- Future links -->
