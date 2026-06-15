@@ -19,7 +19,7 @@ export const boy = {
     },
     {
       label: "Properties",
-      eq: "\\chi = 1, \\, \\text{Projective Plane Immersion}",
+      eq: "\\chi = 1 \\\\ \\text{Projective Plane Immersion}",
     },
   ],
   /**

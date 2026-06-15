@@ -14,6 +14,8 @@ export const dodecahedron = {
   ],
   formulas: [
     { label: "Topology", eq: "V=20, E=30, F=12" },
+    { label: "Euler Characteristic", eq: "\\chi = V - E + F = 2" },
+    { label: "Dual", eq: "\\text{Icosahedron}" },
     { label: "Symmetry", eq: "I_h" },
   ],
   /**

@@ -13,7 +13,9 @@ export const tetrahedron = {
   ],
   formulas: [
     { label: "Topology", eq: "V=4, E=6, F=4" },
+    { label: "Euler Characteristic", eq: "\\chi = V - E + F = 2" },
     { label: "Dihedral Angle", eq: "\\arccos(1/3) \\approx 70.53^\\circ" },
+    { label: "Symmetry", eq: "T_d" },
   ],
   /**
    * 正四面体の頂点と面を生成します。

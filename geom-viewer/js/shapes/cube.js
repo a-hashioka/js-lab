@@ -11,7 +11,8 @@ export const cube = {
   ],
   formulas: [
     { label: "Topology", eq: "V=8, E=12, F=6" },
-    { label: "Euler Characteristic", eq: "\\chi = 2" },
+    { label: "Euler Characteristic", eq: "\\chi = V - E + F = 2" },
+    { label: "Symmetry", eq: "O_h" },
   ],
   /**
    * 立方体の頂点と面を生成します。

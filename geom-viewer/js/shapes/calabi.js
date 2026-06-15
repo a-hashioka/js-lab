@@ -18,7 +18,7 @@ export const calabi = {
   ],
   formulas: [
     { label: "Fermat Quintic", eq: "\\sum_{i=1}^3 z_i^n = 0" },
-    { label: "Shape Parameters", eq: "n = 5, \\, z_i \\in \\mathbb{C}" },
+    { label: "Shape Parameters", eq: "n = 5 \\\\ z_i \\in \\mathbb{C}" },
   ],
   generate: () => {
     const v = [],

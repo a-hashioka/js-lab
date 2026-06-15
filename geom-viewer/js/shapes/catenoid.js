@@ -14,7 +14,7 @@ export const catenoid = {
   ],
   formulas: [
     { label: "Implicit Equation", eq: "\\sqrt{x^2 + y^2} = \\cosh z" },
-    { label: "Curvatures", eq: "H = 0, \\, K = -\\text{sech}^4 z" },
+    { label: "Curvatures", eq: "H = 0 \\\\ K = -\\text{sech}^4 z" },
   ],
   /**
    * カテノイドの頂点と面を生成します。

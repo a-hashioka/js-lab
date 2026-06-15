@@ -17,7 +17,7 @@ export const mobius = {
       label: "Parametric",
       eq: "\\begin{cases} x = (1 + \\frac{v}{2}\\cos\\frac{u}{2})\\cos u \\\\ y = (1 + \\frac{v}{2}\\cos\\frac{u}{2})\\sin u \\\\ z = \\frac{v}{2}\\sin\\frac{u}{2} \\end{cases}",
     },
-    { label: "Properties", eq: "\\chi = 0, \\, \\text{Non-orientable}" },
+    { label: "Properties", eq: "\\chi = 0 \\\\ \\text{Non-orientable}" },
   ],
   generate: () =>
     parametric(64, 10, (u, v) => {

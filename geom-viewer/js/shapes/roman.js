@@ -16,7 +16,7 @@ export const roman = {
     { label: "Implicit Equation", eq: "x^2 y^2 + y^2 z^2 + z^2 x^2 + xyz = 0" },
     {
       label: "Parametric Equations",
-      eq: "x = \\sin 2u \\cos^2 v, \\, y = \\sin u \\sin 2v, \\, z = \\cos u \\sin 2v",
+      eq: "\\begin{cases} x = \\sin 2u \\cos^2 v \\\\ y = \\sin u \\sin 2v \\\\ z = \\cos u \\sin 2v \\end{cases}",
     },
   ],
   generate: () =>

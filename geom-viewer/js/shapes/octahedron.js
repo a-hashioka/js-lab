@@ -11,7 +11,9 @@ export const octahedron = {
   ],
   formulas: [
     { label: "Topology", eq: "V=6, E=12, F=8" },
+    { label: "Euler Characteristic", eq: "\\chi = V - E + F = 2" },
     { label: "Implicit", eq: "|x| + |y| + |z| = 1" },
+    { label: "Symmetry", eq: "O_h" },
   ],
   /**
    * 正八面体の頂点と面を生成します。
