@@ -97,7 +97,7 @@ function loadShape() {
   updateNavigation(id);
 
   state.dynamicCounter = 0;
-  state.shapeData = state.shapeObj.generate(state.dynamicCounter);
+  state.shapeData = state.shapeObj.generate(state.dynamicCounter, state);
   if (state.shapeObj.hideVertices) {
     state.shapeData.hideVertices = true;
   }
@@ -246,8 +246,9 @@ function updateDynamicState(deltaTime) {
 
     // カウンターの整数部分が変化した時のみ再生成（パフォーマンス最適化）
     const currentStep = Math.floor(state.dynamicCounter);
-    if (currentStep !== state.lastGeneratedStep) {
-      state.shapeData = state.shapeObj.generate(currentStep);
+    if (currentStep !== state.lastGeneratedStep || state.currentId === "orrery") {
+      // Orreryはカメラ回転に依存するため、常に（または変化時に）再生成が必要
+      state.shapeData = state.shapeObj.generate(currentStep, state);
       if (state.shapeObj.hideVertices) {
         state.shapeData.hideVertices = true;
       }

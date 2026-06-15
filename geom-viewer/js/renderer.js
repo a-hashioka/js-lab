@@ -75,7 +75,7 @@ export const project = (v, scale, rotX, rotY, rotZ, fov, viewDist, w, h) => {
  * 投影された幾何学的データをキャンバスに描画します。
  *
  * @param {CanvasRenderingContext2D} ctx - キャンバスのレンダリングコンテキスト。
- * @param {Object} data - 形状データ（頂点、面など）。
+ * @param {Object} data - 形状データ（頂点、面、グロー、スタイルなど）。
  * @param {Array} projected - 投影されたスクリーン座標の配列。
  * @param {number} w - キャンバスの幅。
  * @param {number} h - キャンバスの高さ。
@@ -85,7 +85,7 @@ export const draw = (ctx, data, projected, w, h) => {
 
   ctx.clearRect(0, 0, w, h);
 
-  // 1. 面を深度でソート（ペインターのアルゴリズム：奥から順に描画するため）
+  // 1. 面を深度でソート（ペインターのアルゴリズム）
   const faces = data.faces.map((face, index) => {
     let sumScale = 0;
     let validPoints = 0;
@@ -99,18 +99,25 @@ export const draw = (ctx, data, projected, w, h) => {
 
     return {
       face,
+      index,
       avgScale: validPoints > 0 ? sumScale / validPoints : 0,
       color: data.faceColors ? data.faceColors[index] : null,
+      edgeColor: data.edgeColors ? data.edgeColors[index] : null,
+      style: data.faceStyles ? data.faceStyles[index] : null,
     };
   });
 
-  // 奥から前の順にソート
   faces.sort((a, b) => a.avgScale - b.avgScale);
 
   // 2. 面の描画
-  faces.forEach(({ face, avgScale, color }) => {
-    // 距離/スケールに基づいて透明度を適応的に計算
+  faces.forEach(({ face, index, avgScale, color, edgeColor, style }) => {
     const alpha = Math.min(Math.max((avgScale - 0.3) * 2.0, 0.1), 0.85);
+
+    if (style && style.composite) {
+      ctx.globalCompositeOperation = style.composite;
+    } else {
+      ctx.globalCompositeOperation = "source-over";
+    }
 
     if (color) {
       ctx.fillStyle = color.replace("ALPHA", (alpha * 0.9).toFixed(2));
@@ -118,22 +125,21 @@ export const draw = (ctx, data, projected, w, h) => {
       ctx.fillStyle = `rgba(248, 248, 248, ${(alpha * 0.8).toFixed(2)})`;
     }
 
-    ctx.strokeStyle = `rgba(0, 0, 0, ${alpha.toFixed(2)})`;
+    if (edgeColor) {
+      ctx.strokeStyle = edgeColor.replace("ALPHA", alpha.toFixed(2));
+    } else {
+      ctx.strokeStyle = `rgba(0, 0, 0, ${alpha.toFixed(2)})`;
+    }
+    
     ctx.lineWidth = Math.max(0.5, 1.0 * avgScale);
 
-    // パスの描画
     let started = false;
     ctx.beginPath();
-    
     for (let i = 0; i < face.length; i++) {
       const p = projected[face[i]];
       if (p) {
-        if (!started) {
-          ctx.moveTo(p.x, p.y);
-          started = true;
-        } else {
-          ctx.lineTo(p.x, p.y);
-        }
+        if (!started) { ctx.moveTo(p.x, p.y); started = true; }
+        else { ctx.lineTo(p.x, p.y); }
       }
     }
     
@@ -148,12 +154,35 @@ export const draw = (ctx, data, projected, w, h) => {
     }
   });
 
-  // 3. 頂点（ノード）を小さなドットとして描画
+  ctx.globalCompositeOperation = "source-over";
+
+  // 3. グロー（光輪）効果の描画
+  if (data.glows) {
+    data.glows.forEach((glow) => {
+      const p = projected[glow.vertexIdx];
+      if (!p || p.scale <= 0) return;
+
+      const gradRadius = glow.radius * p.scale;
+      const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, gradRadius);
+      
+      glow.stops.forEach((stop) => {
+        gradient.addColorStop(stop.offset, stop.color);
+      });
+
+      ctx.fillStyle = gradient;
+      ctx.globalCompositeOperation = "screen"; // 加算合成で光を表現
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, gradRadius, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    ctx.globalCompositeOperation = "source-over";
+  }
+
+  // 4. 頂点（ノード）の描画
   if (!data.hideVertices && projected.length < 1500) {
     projected.forEach((p) => {
       const a = Math.min(Math.max((p.scale - 0.3) * 2.0, 0), 0.9);
       if (a <= 0) return;
-
       ctx.fillStyle = `rgba(0, 0, 0, ${a.toFixed(2)})`;
       ctx.beginPath();
       ctx.arc(p.x, p.y, 2.0 * p.scale, 0, Math.PI * 2);

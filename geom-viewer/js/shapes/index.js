@@ -26,6 +26,7 @@ import { superShape } from "./super.js";
 import { calabi } from "./calabi.js";
 import { lorenz } from "./lorenz.js";
 import { tesseract } from "./tesseract.js";
+import { orrery } from "./orrery.js";
 
 // 新しく追加された形状
 import { sierpinski } from "./sierpinski.js";
@@ -94,7 +95,7 @@ export const disciplines = [
       {
         name: "Astrophysics and Chaos",
         desc: "Curvature of spacetime and the behavior of complex dynamical systems.",
-        shapes: ["schwarzschild", "lorenz"],
+        shapes: ["schwarzschild", "lorenz", "orrery"],
       },
       {
         name: "Quantum Mechanics",
@@ -164,6 +165,7 @@ export const shapes = {
   calabi,
   lorenz,
   tesseract,
+  orrery,
   sierpinski,
   honeycomb,
   chladni,
