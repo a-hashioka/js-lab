@@ -29,7 +29,7 @@ export const octahedron = {
       { x: 0, y: -1, z: 0 },
       { x: 0, y: 0, z: 1 },
       { x: 0, y: 0, z: -1 },
-    ],
+    ].map(v => ({ x: v.x * 0.9, y: v.y * 0.9, z: v.z * 0.9 })),
     faces: [
       [0, 2, 4],
       [0, 4, 3],

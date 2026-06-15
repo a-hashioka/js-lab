@@ -4,6 +4,29 @@
  */
 
 /**
+ * 4次元の頂点を3次元に投影します。
+ * 
+ * @param {Array} vertices4D - 4次元頂点の配列 {x, y, z, w}。
+ * @param {number} angle - W軸周りの回転角度。
+ * @returns {Array} 3次元頂点の配列 {x, y, z}。
+ */
+export const project4D = (vertices4D, angle) => {
+  const cos = Math.cos(angle);
+  const sin = Math.sin(angle);
+  
+  return vertices4D.map((v) => {
+    // X-W平面での回転
+    const x = v.x * cos - v.w * sin;
+    const w = v.w * cos + v.x * sin;
+    
+    // 遠近投影 (4D -> 3D)
+    // d は投影面までの距離。w が大きい（遠い）ほどスケールが小さくなる。
+    const d = 2 / (3 + w);
+    return { x: x * d, y: v.y * d, z: v.z * d };
+  });
+};
+
+/**
  * 透視投影を使用して、3D頂点を2Dスクリーン座標に投影します。
  *
  * @param {Object} v - 3D頂点 {x, y, z}
@@ -18,6 +41,8 @@
  * @returns {Object} スクリーン座標と奥行きに基づくスケール係 {x, y, scale}。
  */
 export const project = (v, scale, rotX, rotY, rotZ, fov, viewDist, w, h) => {
+  if (!v) return { x: 0, y: 0, scale: 0 };
+
   // Y軸周りの回転
   const cosY = Math.cos(rotY),
     sinY = Math.sin(rotY);
@@ -56,18 +81,25 @@ export const project = (v, scale, rotX, rotY, rotZ, fov, viewDist, w, h) => {
  * @param {number} h - キャンバスの高さ。
  */
 export const draw = (ctx, data, projected, w, h) => {
+  if (!ctx || !data || !projected) return;
+
   ctx.clearRect(0, 0, w, h);
 
   // 1. 面を深度でソート（ペインターのアルゴリズム：奥から順に描画するため）
   const faces = data.faces.map((face, index) => {
     let sumScale = 0;
-    face.forEach(
-      (idx) => (sumScale += projected[idx] ? projected[idx].scale : 0),
-    );
+    let validPoints = 0;
+    
+    face.forEach((idx) => {
+      if (projected[idx]) {
+        sumScale += projected[idx].scale;
+        validPoints++;
+      }
+    });
 
     return {
       face,
-      avgScale: sumScale / face.length,
+      avgScale: validPoints > 0 ? sumScale / validPoints : 0,
       color: data.faceColors ? data.faceColors[index] : null,
     };
   });
@@ -87,17 +119,25 @@ export const draw = (ctx, data, projected, w, h) => {
     }
 
     ctx.strokeStyle = `rgba(0, 0, 0, ${alpha.toFixed(2)})`;
-    ctx.lineWidth = 1.0 * avgScale;
+    ctx.lineWidth = Math.max(0.5, 1.0 * avgScale);
 
     // パスの描画
-    if (projected[face[0]]) {
-      ctx.beginPath();
-      ctx.moveTo(projected[face[0]].x, projected[face[0]].y);
-      for (let i = 1; i < face.length; i++) {
-        const p = projected[face[i]];
-        if (p) ctx.lineTo(p.x, p.y);
+    let started = false;
+    ctx.beginPath();
+    
+    for (let i = 0; i < face.length; i++) {
+      const p = projected[face[i]];
+      if (p) {
+        if (!started) {
+          ctx.moveTo(p.x, p.y);
+          started = true;
+        } else {
+          ctx.lineTo(p.x, p.y);
+        }
       }
-      
+    }
+    
+    if (started) {
       if (face.length > 2) {
         ctx.closePath();
         ctx.fill();
@@ -121,3 +161,4 @@ export const draw = (ctx, data, projected, w, h) => {
     });
   }
 };
+

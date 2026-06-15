@@ -5,12 +5,8 @@
  */
 
 import { shapes, disciplines } from "./shapes/index.js";
-import { project, draw } from "./renderer.js";
-
-// --- 設定と定数 ---
-const ROTATION_SPEED = 0.01;
-const AUTO_ROTATION_SPEEDS = { x: 0.005, y: 0.003, z: 0.002 };
-const PERSPECTIVE = { fov: 600, viewDist: 600 };
+import { project, project4D, draw } from "./renderer.js";
+import { ROTATION_SPEED, AUTO_ROTATION_SPEEDS, PERSPECTIVE } from "./constants.js";
 
 // --- 状態管理 ---
 const state = {
@@ -27,9 +23,12 @@ const state = {
   isDragging: false,
   previousMousePos: { x: 0, y: 0 },
 
-  // 動的な形状（Lorenzなど）のための特殊状態
+  // 動的な形状のための特殊状態
   dynamicCounter: 0,
   angle4D: 0,
+
+  // 時間管理（スムーズなアニメーション用）
+  lastTime: 0,
 };
 
 const canvas = document.getElementById("canvas");
@@ -65,6 +64,7 @@ function updateNavigation(id) {
   const nextBtn = document.getElementById("next-shape");
 
   const setBtn = (btn, targetId) => {
+    if (!btn) return;
     if (targetId) {
       btn.href = `viewer.html?id=${targetId}`;
       btn.style.opacity = "1";
@@ -96,22 +96,25 @@ function loadShape() {
 
   updateNavigation(id);
 
-  state.shapeData = state.shapeObj.generate();
+  state.dynamicCounter = 0;
+  state.shapeData = state.shapeObj.generate(state.dynamicCounter);
   if (state.shapeObj.hideVertices) {
     state.shapeData.hideVertices = true;
   }
-  state.dynamicCounter = 0;
 
   // テキストコンテンツの更新
-  document.getElementById("shape-title").textContent = state.shapeObj.title;
+  const titleEl = document.getElementById("shape-title");
+  if (titleEl) titleEl.textContent = state.shapeObj.title;
 
   const descContainer = document.getElementById("shape-desc");
-  descContainer.innerHTML = "";
-  (state.shapeObj.desc || []).forEach((text) => {
-    const p = document.createElement("p");
-    p.textContent = text;
-    descContainer.appendChild(p);
-  });
+  if (descContainer) {
+    descContainer.innerHTML = "";
+    (state.shapeObj.desc || []).forEach((text) => {
+      const p = document.createElement("p");
+      p.textContent = text;
+      descContainer.appendChild(p);
+    });
+  }
 
   renderFormulas();
 }
@@ -122,6 +125,8 @@ function loadShape() {
 function renderFormulas() {
   const formulaList = document.getElementById("formula-list");
   const formulaBlock = document.getElementById("formulas-block");
+  if (!formulaList || !formulaBlock) return;
+
   formulaList.innerHTML = "";
 
   const formulas = state.shapeObj.formulas || [];
@@ -167,9 +172,12 @@ function initInput() {
   if (infoToggle && contentSection) {
     infoToggle.addEventListener("click", () => {
       const isHidden = contentSection.classList.toggle("hidden");
-      infoToggle.querySelector(".icon").textContent = isHidden ? "i" : "×";
+      const icon = infoToggle.querySelector(".icon");
+      if (icon) icon.textContent = isHidden ? "i" : "×";
     });
   }
+
+  if (!canvas) return;
 
   const handleDown = (e) => {
     if (
@@ -194,7 +202,7 @@ function initInput() {
   const handleUp = () => (state.isDragging = false);
 
   canvas.addEventListener("mousedown", handleDown);
-  window.addEventListener("mousemove", handleMove);
+  window.addEventListener("mousemove", handleMove, { passive: false });
   window.addEventListener("mouseup", handleUp);
 
   canvas.addEventListener("touchstart", handleDown, { passive: false });
@@ -206,6 +214,7 @@ function initInput() {
  * キャンバスのサイズをウィンドウに合わせ、DPI調整を行います。
  */
 function resize() {
+  if (!canvas || !ctx) return;
   const dpr = window.devicePixelRatio || 1;
   const rect = canvas.parentElement.getBoundingClientRect();
   canvas.width = rect.width * dpr;
@@ -215,38 +224,49 @@ function resize() {
 }
 
 /**
- * 特定の形状（Lorenz、Tesseract）の動的なプロパティを更新します。
+ * 特定の形状の動的なプロパティを更新します。
+ *
+ * @param {number} deltaTime - 前回のフレームからの経過時間（ミリ秒）。
  */
-function updateDynamicState() {
+function updateDynamicState(deltaTime) {
+  if (!state.shapeObj) return;
+
+  // 基準となるフレームレート (60fps) に対する係数
+  const dtFactor = deltaTime / 16.666;
+
   // 形状特有の動的更新
   if (state.shapeObj.isDynamic) {
-    state.dynamicCounter++;
-    state.shapeData = state.shapeObj.generate(state.dynamicCounter);
-    if (state.shapeObj.hideVertices) {
-      state.shapeData.hideVertices = true;
+    const step = (state.shapeObj.step || 1) * dtFactor;
+    state.dynamicCounter += step;
+    
+    // 制限がある場合はその値でクランプ
+    if (state.shapeObj.limit && state.dynamicCounter > state.shapeObj.limit) {
+      state.dynamicCounter = state.shapeObj.limit;
     }
-  } else if (state.currentId === "lorenz" && state.dynamicCounter < 3000) {
-    // Lorenz Attractor: 段階的な成長
-    state.dynamicCounter += 7;
-    state.shapeData = state.shapeObj.generate(
-      Math.min(state.dynamicCounter, 3000),
-    );
-    if (state.shapeObj.hideVertices) {
-      state.shapeData.hideVertices = true;
+
+    // カウンターの整数部分が変化した時のみ再生成（パフォーマンス最適化）
+    const currentStep = Math.floor(state.dynamicCounter);
+    if (currentStep !== state.lastGeneratedStep) {
+      state.shapeData = state.shapeObj.generate(currentStep);
+      if (state.shapeObj.hideVertices) {
+        state.shapeData.hideVertices = true;
+      }
+      state.lastGeneratedStep = currentStep;
     }
   }
 
   // ドラッグ中ではない時の自動回転
   if (!state.isDragging) {
-    state.autoAngles.x += AUTO_ROTATION_SPEEDS.x;
-    state.autoAngles.y += AUTO_ROTATION_SPEEDS.y;
-    state.autoAngles.z += AUTO_ROTATION_SPEEDS.z;
-    state.angle4D += 0.02;
+    state.autoAngles.x += AUTO_ROTATION_SPEEDS.x * dtFactor;
+    state.autoAngles.y += AUTO_ROTATION_SPEEDS.y * dtFactor;
+    state.autoAngles.z += AUTO_ROTATION_SPEEDS.z * dtFactor;
+    state.angle4D += 0.02 * dtFactor;
   }
 
-  // スムーズな回転のダンピング処理
-  state.rotation.x += (state.rotationTarget.x - state.rotation.x) * 0.1;
-  state.rotation.y += (state.rotationTarget.y - state.rotation.y) * 0.1;
+  // スムーズな回転のダンピング処理（時間依存）
+  const lerpFactor = 1 - Math.pow(0.9, dtFactor);
+  state.rotation.x += (state.rotationTarget.x - state.rotation.x) * lerpFactor;
+  state.rotation.y += (state.rotationTarget.y - state.rotation.y) * lerpFactor;
 }
 
 /**
@@ -258,18 +278,13 @@ function updateDynamicState() {
  * @returns {Array|null} 投影された頂点の配列。
  */
 function getProjectedVertices(width, height, scale) {
+  if (!state.shapeData) return null;
+
   let verts = state.shapeData.vertices;
 
-  // 4D投影 (Tesseract)
+  // 4D投影
   if (state.shapeObj.is4D && state.shapeData.vertices4D) {
-    const cos = Math.cos(state.angle4D),
-      sin = Math.sin(state.angle4D);
-    verts = state.shapeData.vertices4D.map((v) => {
-      const x = v.x * cos - v.w * sin;
-      const w = v.w * cos + v.x * sin;
-      const d = 2 / (3 + w);
-      return { x: x * d, y: v.y * d, z: v.z * d };
-    });
+    verts = project4D(state.shapeData.vertices4D, state.angle4D);
   }
 
   if (!verts) return null;
@@ -291,12 +306,24 @@ function getProjectedVertices(width, height, scale) {
 
 /**
  * メインのアニメーションループ。
+ *
+ * @param {number} time - 現在のタイムスタンプ（ミリ秒）。
  */
-function renderLoop() {
+function renderLoop(time = 0) {
+  const deltaTime = time - state.lastTime;
+  state.lastTime = time;
+
+  // deltaTime が異常に大きい場合（タブ復帰時など）は無視
+  if (deltaTime > 100) {
+    requestAnimationFrame(renderLoop);
+    return;
+  }
+
   if (ctx && state.shapeData) {
-    updateDynamicState();
+    updateDynamicState(deltaTime);
 
     const rect = canvas.getBoundingClientRect();
+    // スケールを 0.65 に調整
     const scale = Math.min(rect.width, rect.height) * 0.65;
 
     const projected = getProjectedVertices(rect.width, rect.height, scale);

@@ -21,12 +21,11 @@ export const torus = {
   generate: () =>
     parametric(32, 16, (u, v) => {
       const R = 0.6,
-        r = 0.25;
-      const s = 0.9;
+        r = 0.22;
       return {
-        x: (R + r * Math.cos(v)) * Math.cos(u) * s,
-        y: (R + r * Math.cos(v)) * Math.sin(u) * s,
-        z: r * Math.sin(v) * s,
+        x: (R + r * Math.cos(v)) * Math.cos(u),
+        y: (R + r * Math.cos(v)) * Math.sin(u),
+        z: r * Math.sin(v),
       };
     }),
 };

@@ -1,21 +1,24 @@
 /**
  * js/utils.js
  * 幾何学的な形状生成に使用される数学的ユーティリティ関数。
+ * ベクトル演算、メッシュ細分化、および曲面生成アルゴリズムを提供します。
  */
 
 /**
  * 3Dベクトルを正規化して単位ベクトルにします。
+ * 零ベクトルの場合は {x: 1, y: 0, z: 0} を返します（安全策）。
  *
  * @param {Object} v - 正規化する3Dベクトル {x, y, z}
  * @returns {Object} 正規化された3Dベクトル {x, y, z}
  */
 export const normalize = (v) => {
-  const l = Math.sqrt(v.x ** 2 + v.y ** 2 + v.z ** 2) || 1;
+  const l = Math.sqrt(v.x ** 2 + v.y ** 2 + v.z ** 2);
+  if (l < 0.000001) return { x: 1, y: 0, z: 0 };
   return { x: v.x / l, y: v.y / l, z: v.z / l };
 };
 
 /**
- * ベクトルの基本演算
+ * ベクトルの基本演算（加算、減算、乗算、除算、内積、外積、中点）。
  */
 export const vec = {
   add: (v1, v2) => ({ x: v1.x + v2.x, y: v1.y + v2.y, z: v1.z + v2.z }),
@@ -38,8 +41,9 @@ export const vec = {
 /**
  * メッシュを細分化（サブディビジョン）します。
  * 各三角形の面を4つの小さな三角形に分割します。
+ * 共有頂点をキャッシュすることで、頂点の重複を防止します。
  *
- * @param {Object} geometry - {vertices, faces}
+ * @param {Object} geometry - 入力メッシュ {vertices, faces}
  * @param {boolean} shouldNormalize - 新しい頂点を正規化するかどうか（球体生成用）
  * @returns {Object} 細分化された {vertices, faces}
  */
@@ -49,6 +53,7 @@ export const subdivide = (geometry, shouldNormalize = false) => {
   const cache = new Map();
   const nextVertices = [...vertices];
 
+  /** 中点のインデックスを取得、未生成なら生成 */
   const getMidpoint = (p1Idx, p2Idx) => {
     const key = p1Idx < p2Idx ? `${p1Idx}-${p2Idx}` : `${p2Idx}-${p1Idx}`;
     if (cache.has(key)) return cache.get(key);
@@ -64,7 +69,7 @@ export const subdivide = (geometry, shouldNormalize = false) => {
 
   faces.forEach((face) => {
     if (face.length !== 3) {
-      // 三角形以外は現在はサポートしない（またはそのまま通す）
+      // 三角形以外は現在はサポートしない（そのまま通す）
       nextFaces.push(face);
       return;
     }
@@ -80,12 +85,12 @@ export const subdivide = (geometry, shouldNormalize = false) => {
 
 /**
  * パス（曲線）に沿って管状のメッシュ（チューブ）を生成します。
- * 並行移動標構（Parallel Transport Frame）を使用して、ねじれを最小限に抑え、
- * 閉じたパスの場合はホロノミー（ねじれの累積）を均等に分散させます。
+ * 並行移動標構（Bishop Frame / Parallel Transport Frame）を使用して、急激な曲がりでもねじれを最小限に抑えます。
+ * 閉じたパスの場合は、始点と終点のねじれの差（ホロノミー）を全セグメントに均等に分散させます。
  *
  * @param {Function} pathFunc - パス上の点(t)を返す関数。tは0から1。
- * @param {number} segU - パス方向の分割数。
- * @param {number} segV - 断面（円）の分割数。
+ * @param {number} segU - パス方向（長さ方向）の分割数。
+ * @param {number} segV - 断面（円周方向）の分割数。
  * @param {number} radius - チューブの半径。
  * @param {boolean} closed - パスが閉じているかどうか。
  * @returns {Object} 生成された {vertices, faces}。
@@ -95,7 +100,7 @@ export const tube = (pathFunc, segU, segV, radius, closed = false) => {
   const faces = [];
   const frames = [];
 
-  // 1. 各ポイントでの接線を計算
+  // 1. 各ポイントでの接線(Tangent)を計算
   const tangents = [];
   for (let i = 0; i <= segU; i++) {
     const t = i / segU;
@@ -114,6 +119,7 @@ export const tube = (pathFunc, segU, segV, radius, closed = false) => {
   }
 
   // 2. 並行移動標構を構築 (Bishop Frame)
+  // 初期フレームの設定
   let T0 = tangents[0];
   let up = { x: 0, y: 1, z: 0 };
   if (Math.abs(T0.y) > 0.9) up = { x: 1, y: 0, z: 0 };
@@ -121,6 +127,7 @@ export const tube = (pathFunc, segU, segV, radius, closed = false) => {
   let N0 = vec.cross(B0, T0);
   frames.push({ T: T0, B: B0, N: N0 });
 
+  /** ロドリゲスの回転公式を使用してベクトルを回転 */
   const rotate = (v, a, theta) => {
     const cos = Math.cos(theta), sin = Math.sin(theta);
     return vec.add(
@@ -129,6 +136,7 @@ export const tube = (pathFunc, segU, segV, radius, closed = false) => {
     );
   };
 
+  // 前のフレームを接線に沿って最小回転で伝播させる
   for (let i = 1; i <= segU; i++) {
     const T_prev = tangents[i - 1];
     const T_curr = tangents[i];
@@ -160,9 +168,9 @@ export const tube = (pathFunc, segU, segV, radius, closed = false) => {
     twistOffset = Math.atan2(sin, cos);
   }
 
-  // 4. 頂点の生成 (重複を避ける)
+  // 4. 頂点の生成
   const numU = closed ? segU : segU + 1;
-  const numV = segV; // 断面は常に閉じるので重複を避ける
+  const numV = segV; // 断面は円なので重複を避けるため終点は含めない
 
   for (let i = 0; i < numU; i++) {
     const p = pathFunc(i / segU);
@@ -187,14 +195,12 @@ export const tube = (pathFunc, segU, segV, radius, closed = false) => {
     }
   }
 
-  // 5. 面の生成 (インデックスのラッピング)
+  // 5. 面（四角形）の生成
   for (let i = 0; i < segU; i++) {
     if (!closed && i === segU) break;
     const i0 = i;
     const i1 = (i + 1) % (closed ? segU : segU + 1);
     
-    if (!closed && i1 === 0) continue; // 安全策
-
     for (let j = 0; j < segV; j++) {
       const j0 = j;
       const j1 = (j + 1) % segV;
@@ -211,15 +217,15 @@ export const tube = (pathFunc, segU, segV, radius, closed = false) => {
 };
 
 /**
- * 媒介変数を用いた曲面を生成するためのヘルパー関数。
- * (u, v) ドメインを (x, y, z) 座標にマッピングし、頂点と面を生成します。
+ * 媒介変数を用いた曲面（Parametric Surface）を生成します。
+ * (u, v) ドメインを (x, y, z) 座標にマッピングし、頂点と四角形面を生成します。
  *
  * @param {number} segU - U軸方向の分割数。
  * @param {number} segV - V軸方向の分割数。
  * @param {Function} func - マッピング関数 (u, v) => {x, y, z}。
  * @param {Array} uRange - Uの範囲 [min, max] (デフォルトは [0, 2π])。
  * @param {Array} vRange - Vの範囲 [min, max] (デフォルトは [0, 2π])。
- * @returns {Object} 生成された {vertices, faces}。verticesは座標オブジェクトの配列、facesは頂点インデックスの配列。
+ * @returns {Object} 生成された {vertices, faces}。
  */
 export const parametric = (
   segU,

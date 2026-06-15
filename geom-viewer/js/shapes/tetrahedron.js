@@ -31,7 +31,7 @@ export const tetrahedron = {
    * @returns {Object} {vertices, faces}
    */
   generate: () => ({
-    vertices: TETRA_VERTICES,
+    vertices: TETRA_VERTICES.map(v => ({ x: v.x * 0.75, y: v.y * 0.75, z: v.z * 0.75 })),
     faces: [
       [0, 1, 2],
       [0, 2, 3],

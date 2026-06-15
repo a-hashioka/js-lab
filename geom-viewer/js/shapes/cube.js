@@ -22,7 +22,7 @@ export const cube = {
    */
   generate: () => {
     const v = [];
-    const s = 1 / Math.sqrt(3);
+    const s = 0.65;
     for (let i = 0; i < 8; i++)
       v.push({
         x: (i & 1 ? 1 : -1) * s,

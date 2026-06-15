@@ -1,20 +1,22 @@
 /**
  * js/gallery.js
- * 階層的な形状ギャラリーをレンダリングします。
+ * 階層的な形状ギャラリーを動的に生成・レンダリングします。
  */
 
 import { disciplines, shapes } from "./shapes/index.js";
 
 /**
  * ギャラリーを生成してDOMに挿入します。
- * disciplinesデータに基づき、セクション、グループ、形状リストを構築します。
+ * disciplinesデータ（分野、グループ、形状）に基づき、セクションを構築します。
  */
 function renderGallery() {
   const container = document.getElementById("gallery-container");
   if (!container) return;
 
+  // 既存のコンテンツをクリア
   container.innerHTML = "";
 
+  // 分野（Mathematics, Physics, etc.）ごとにセクションを作成
   disciplines.forEach((discipline) => {
     const section = document.createElement("section");
     section.className = "discipline-section";
@@ -26,6 +28,7 @@ function renderGallery() {
       </div>
     `;
 
+    // 分野内のグループ（Platonic Solids, etc.）ごとにコンテナを作成
     discipline.groups.forEach((group) => {
       const groupDiv = document.createElement("div");
       groupDiv.className = "group-container";
@@ -38,6 +41,7 @@ function renderGallery() {
       const ul = document.createElement("ul");
       ul.className = "shape-list";
 
+      // グループ内の各形状へのリンクを作成
       group.shapes.forEach((id) => {
         const shape = shapes[id];
         if (!shape) return;
@@ -55,7 +59,10 @@ function renderGallery() {
   });
 }
 
-// 初期化処理
+/**
+ * DOMContentLoaded時に実行。
+ * すでにロード済みの場合は即座に実行。
+ */
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", renderGallery);
 } else {

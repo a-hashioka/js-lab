@@ -11,6 +11,9 @@
 export const lorenz = {
   title: "Lorenz Attractor",
   hideVertices: true,
+  isDynamic: true,
+  step: 7,
+  limit: 3000,
   desc: [
     "The Lorenz attractor is a fractal structure that arises from a system of three ordinary differential equations. It is a 'strange attractor,' meaning it has a non-integer Hausdorff dimension and exhibits sensitive dependence on initial conditions, a core characteristic of chaos theory. The resulting trajectory traces a butterfly-like shape in three-dimensional space.",
     "It was introduced by Edward Lorenz in 1963 while he was studying atmospheric convection. His discovery of this chaotic system led to the formalization of the 'butterfly effect,' where small changes in initial states can result in vastly different outcomes, revolutionizing modern meteorology and non-linear dynamics.",
