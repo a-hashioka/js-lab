@@ -1,11 +1,14 @@
 /**
  * js/gallery.js
- * Renders the hierarchical shape gallery.
+ * 階層的な形状ギャラリーをレンダリングします。
  */
 
 import { disciplines, shapes } from "./shapes/index.js";
 
-// Cache-busting: v2.0
+/**
+ * ギャラリーを生成してDOMに挿入します。
+ * disciplinesデータに基づき、セクション、グループ、形状リストを構築します。
+ */
 function renderGallery() {
   const container = document.getElementById("gallery-container");
   if (!container) return;
@@ -52,6 +55,7 @@ function renderGallery() {
   });
 }
 
+// 初期化処理
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", renderGallery);
 } else {

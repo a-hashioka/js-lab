@@ -1,42 +1,42 @@
 /**
  * js/renderer.js
- * Optimized 3D to 2D projection and Canvas rendering engine.
+ * 最適化された3Dから2Dへの投影およびCanvas描画エンジン。
  */
 
 /**
- * Projects a 3D vertex to 2D screen coordinates using perspective projection.
+ * 透視投影を使用して、3D頂点を2Dスクリーン座標に投影します。
  *
- * @param {Object} v - The 3D vertex {x, y, z}.
- * @param {number} scale - Global scaling factor.
- * @param {number} rotX - Rotation around X-axis (radians).
- * @param {number} rotY - Rotation around Y-axis (radians).
- * @param {number} rotZ - Rotation around Z-axis (radians).
- * @param {number} fov - Field of view (focal length).
- * @param {number} viewDist - Distance from the viewer to the object.
- * @param {number} w - Canvas width.
- * @param {number} h - Canvas height.
- * @returns {Object} {x, y, scale} Screen coordinates and depth-based scale factor.
+ * @param {Object} v - 3D頂点 {x, y, z}
+ * @param {number} scale - グローバルスケーリング係数。
+ * @param {number} rotX - X軸周りの回転（ラジアン）。
+ * @param {number} rotY - Y軸周りの回転（ラジアン）。
+ * @param {number} rotZ - Z軸周りの回転（ラジアン）。
+ * @param {number} fov - 視野角（焦点距離）。
+ * @param {number} viewDist - 視点からオブジェクトまでの距離。
+ * @param {number} w - キャンバスの幅。
+ * @param {number} h - キャンバスの高さ。
+ * @returns {Object} スクリーン座標と奥行きに基づくスケール係数 {x, y, scale}。
  */
 export const project = (v, scale, rotX, rotY, rotZ, fov, viewDist, w, h) => {
-  // Rotate around Y-axis
+  // Y軸周りの回転
   const cosY = Math.cos(rotY),
     sinY = Math.sin(rotY);
   const y1 = v.y * cosY - v.z * sinY;
   const z1 = v.z * cosY + v.y * sinY;
 
-  // Rotate around X-axis
+  // X軸周りの回転
   const cosX = Math.cos(rotX),
     sinX = Math.sin(rotX);
   const x2 = v.x * cosX - z1 * sinX;
   const z2 = z1 * cosX + v.x * sinX;
 
-  // Rotate around Z-axis
+  // Z軸周りの回転
   const cosZ = Math.cos(rotZ),
     sinZ = Math.sin(rotZ);
   const x3 = x2 * cosZ - y1 * sinZ;
   const y3 = y1 * cosZ + x2 * sinZ;
 
-  // Perspective projection
+  // 透視投影の計算
   const s = fov / (fov + z2 * scale + viewDist);
 
   return {
@@ -47,18 +47,18 @@ export const project = (v, scale, rotX, rotY, rotZ, fov, viewDist, w, h) => {
 };
 
 /**
- * Renders the projected geometric data onto the canvas context.
+ * 投影された幾何学的データをキャンバスに描画します。
  *
- * @param {CanvasRenderingContext2D} ctx - The canvas context.
- * @param {Object} data - The shape data (vertices, faces, etc.).
- * @param {Array} projected - Array of projected screen coordinates.
- * @param {number} w - Canvas width.
- * @param {number} h - Canvas height.
+ * @param {CanvasRenderingContext2D} ctx - キャンバスのレンダリングコンテキスト。
+ * @param {Object} data - 形状データ（頂点、面など）。
+ * @param {Array} projected - 投影されたスクリーン座標の配列。
+ * @param {number} w - キャンバスの幅。
+ * @param {number} h - キャンバスの高さ。
  */
 export const draw = (ctx, data, projected, w, h) => {
   ctx.clearRect(0, 0, w, h);
 
-  // 1. Prepare and sort faces by depth (Z-sorting for painter's algorithm)
+  // 1. 面を深度でソート（ペインターのアルゴリズム：奥から順に描画するため）
   const faces = data.faces.map((face, index) => {
     let sumScale = 0;
     face.forEach(
@@ -72,12 +72,12 @@ export const draw = (ctx, data, projected, w, h) => {
     };
   });
 
-  // Sort back-to-front
+  // 奥から前の順にソート
   faces.sort((a, b) => a.avgScale - b.avgScale);
 
-  // 2. Render faces
+  // 2. 面の描画
   faces.forEach(({ face, avgScale, color }) => {
-    // Calculate adaptive alpha based on distance/scale
+    // 距離/スケールに基づいて透明度を適応的に計算
     const alpha = Math.min(Math.max((avgScale - 0.3) * 2.0, 0.1), 0.85);
 
     if (color) {
@@ -89,7 +89,7 @@ export const draw = (ctx, data, projected, w, h) => {
     ctx.strokeStyle = `rgba(0, 0, 0, ${alpha.toFixed(2)})`;
     ctx.lineWidth = 1.0 * avgScale;
 
-    // Draw path
+    // パスの描画
     if (projected[face[0]]) {
       ctx.beginPath();
       ctx.moveTo(projected[face[0]].x, projected[face[0]].y);
@@ -103,7 +103,7 @@ export const draw = (ctx, data, projected, w, h) => {
     }
   });
 
-  // 3. Render vertices (Nodes) as small dots
+  // 3. 頂点（ノード）を小さなドットとして描画
   if (!data.hideVertices && projected.length < 1500) {
     projected.forEach((p) => {
       const a = Math.min(Math.max((p.scale - 0.3) * 2.0, 0), 0.9);

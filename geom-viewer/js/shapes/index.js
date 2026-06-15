@@ -1,13 +1,33 @@
 /**
  * js/shapes/index.js
- * Central registry for all geometric shapes with hierarchical categorization.
+ * 階層的なカテゴリ分けを持つ、すべての幾何学的形状の中央レジストリ。
  */
 
-import { polyhedra } from "./polyhedra.js";
-import { surfaces } from "./surfaces.js";
-import { complex } from "./complex.js";
+import { tetrahedron } from "./tetrahedron.js";
+import { cube } from "./cube.js";
+import { octahedron } from "./octahedron.js";
+import { dodecahedron } from "./dodecahedron.js";
+import { icosahedron } from "./icosahedron.js";
+import { bucky } from "./bucky.js";
+import { sphere } from "./sphere.js";
+import { torus } from "./torus.js";
+import { mobius } from "./mobius.js";
+import { klein } from "./klein.js";
+import { boy } from "./boy.js";
+import { hyper } from "./hyper.js";
+import { dini } from "./dini.js";
+import { enneper } from "./enneper.js";
+import { roman } from "./roman.js";
+import { kuen } from "./kuen.js";
+import { catenoid } from "./catenoid.js";
+import { dna } from "./dna.js";
+import { knot } from "./knot.js";
+import { superShape } from "./super.js";
+import { calabi } from "./calabi.js";
+import { lorenz } from "./lorenz.js";
+import { tesseract } from "./tesseract.js";
 
-// Define hierarchical categories for the gallery
+// ギャラリー用の階層的なカテゴリを定義
 export const disciplines = [
   {
     name: "I. Discrete Geometry & Polyhedral Theory",
@@ -109,7 +129,27 @@ export const disciplines = [
 
 // Flat registry for the viewer
 export const shapes = {
-  ...polyhedra,
-  ...surfaces,
-  ...complex,
+  tetrahedron,
+  cube,
+  octahedron,
+  dodecahedron,
+  icosahedron,
+  bucky,
+  sphere,
+  torus,
+  mobius,
+  klein,
+  boy,
+  hyper,
+  dini,
+  enneper,
+  roman,
+  kuen,
+  catenoid,
+  dna,
+  knot,
+  super: superShape,
+  calabi,
+  lorenz,
+  tesseract,
 };

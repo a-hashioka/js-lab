@@ -1,33 +1,33 @@
 /**
  * js/viewer.js
- * Main controller for the individual shape viewer.
- * Manages state, input, and the rendering loop.
+ * 個別の形状ビューアーのメインコントローラー。
+ * 状態管理、入力処理、およびレンダリングループを担当します。
  */
 
 import { shapes, disciplines } from "./shapes/index.js";
 import { project, draw } from "./renderer.js";
 
-// --- Configuration & Constants ---
+// --- 設定と定数 ---
 const ROTATION_SPEED = 0.01;
 const AUTO_ROTATION_SPEEDS = { x: 0.005, y: 0.003, z: 0.002 };
 const PERSPECTIVE = { fov: 600, viewDist: 600 };
 
-// --- State Management ---
+// --- 状態管理 ---
 const state = {
   currentId: "",
   shapeObj: null,
   shapeData: null,
 
-  // Transformation state
+  // 変形状態
   rotation: { x: 0.5, y: 0.5 },
   rotationTarget: { x: 0.5, y: 0.5 },
   autoAngles: { x: 0, y: 0, z: 0 },
 
-  // Interaction state
+  // インタラクション状態
   isDragging: false,
   previousMousePos: { x: 0, y: 0 },
 
-  // Specialized state for dynamic shapes
+  // 動的な形状（Lorenzなど）のための特殊状態
   dynamicCounter: 0,
   angle4D: 0,
 };
@@ -36,7 +36,9 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas ? canvas.getContext("2d", { alpha: true }) : null;
 
 /**
- * Calculates ordered list of shape IDs for navigation.
+ * ナビゲーション用の形状IDの順序付きリストを取得します。
+ *
+ * @returns {Array} 形状IDの配列。
  */
 const getOrderedIds = () => {
   const ids = [];
@@ -53,7 +55,9 @@ const getOrderedIds = () => {
 const orderedIds = getOrderedIds();
 
 /**
- * Updates UI elements for navigation (Prev/Next buttons).
+ * ナビゲーションUI（戻る/次へボタン）を更新します。
+ *
+ * @param {string} id - 現在の形状ID。
  */
 function updateNavigation(id) {
   const index = orderedIds.indexOf(id);
@@ -76,7 +80,7 @@ function updateNavigation(id) {
 }
 
 /**
- * Loads the shape data and populates the UI.
+ * 形状データをロードし、UIを初期化します。
  */
 function loadShape() {
   const params = new URLSearchParams(window.location.search);
@@ -95,7 +99,7 @@ function loadShape() {
   state.shapeData = state.shapeObj.generate();
   state.dynamicCounter = 0;
 
-  // Update Text Content
+  // テキストコンテンツの更新
   document.getElementById("shape-title").textContent = state.shapeObj.title;
 
   const descContainer = document.getElementById("shape-desc");
@@ -110,7 +114,7 @@ function loadShape() {
 }
 
 /**
- * Renders mathematical formulas using KaTeX if available.
+ * KaTeXを使用して数式をレンダリングします（利用可能な場合）。
  */
 function renderFormulas() {
   const formulaList = document.getElementById("formula-list");
@@ -151,7 +155,7 @@ function renderFormulas() {
 }
 
 /**
- * Sets up interaction listeners.
+ * インタラクションのためのリスナーを設定します。
  */
 function initInput() {
   const infoToggle = document.getElementById("info-toggle");
@@ -193,7 +197,7 @@ function initInput() {
 }
 
 /**
- * Syncs canvas dimensions with CSS and handles DPI.
+ * キャンバスのサイズをウィンドウに合わせ、DPI調整を行います。
  */
 function resize() {
   const dpr = window.devicePixelRatio || 1;
@@ -205,10 +209,10 @@ function resize() {
 }
 
 /**
- * Updates dynamic properties of specific shapes (Lorenz, Tesseract).
+ * 特定の形状（Lorenz、Tesseract）の動的なプロパティを更新します。
  */
 function updateDynamicState() {
-  // Lorenz Attractor: Incremental growth
+  // Lorenz Attractor: 段階的な成長
   if (state.currentId === "lorenz" && state.dynamicCounter < 3000) {
     state.dynamicCounter += 7;
     state.shapeData = state.shapeObj.generate(
@@ -216,7 +220,7 @@ function updateDynamicState() {
     );
   }
 
-  // Auto-rotation when not dragging
+  // ドラッグ中ではない時の自動回転
   if (!state.isDragging) {
     state.autoAngles.x += AUTO_ROTATION_SPEEDS.x;
     state.autoAngles.y += AUTO_ROTATION_SPEEDS.y;
@@ -224,18 +228,23 @@ function updateDynamicState() {
     state.angle4D += 0.02;
   }
 
-  // Smooth rotation damping
+  // スムーズな回転のダンピング処理
   state.rotation.x += (state.rotationTarget.x - state.rotation.x) * 0.1;
   state.rotation.y += (state.rotationTarget.y - state.rotation.y) * 0.1;
 }
 
 /**
- * Projects vertices, handling 4D-to-3D projection if necessary.
+ * 頂点を投影します。必要に応じて4Dから3Dへの投影も行います。
+ *
+ * @param {number} width - 描画領域の幅。
+ * @param {number} height - 描画領域の高さ。
+ * @param {number} scale - 投影スケール。
+ * @returns {Array|null} 投影された頂点の配列。
  */
 function getProjectedVertices(width, height, scale) {
   let verts = state.shapeData.vertices;
 
-  // 4D Projection (Tesseract)
+  // 4D投影 (Tesseract)
   if (state.shapeObj.is4D && state.shapeData.vertices4D) {
     const cos = Math.cos(state.angle4D),
       sin = Math.sin(state.angle4D);
@@ -265,7 +274,7 @@ function getProjectedVertices(width, height, scale) {
 }
 
 /**
- * Main animation loop.
+ * メインのアニメーションループ。
  */
 function renderLoop() {
   if (ctx && state.shapeData) {
@@ -283,7 +292,7 @@ function renderLoop() {
   requestAnimationFrame(renderLoop);
 }
 
-// Initialization
+// 初期化処理
 document.addEventListener("DOMContentLoaded", () => {
   loadShape();
   initInput();
