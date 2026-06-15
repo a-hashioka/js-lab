@@ -1,17 +1,18 @@
 body {
   height: 100vh;
-  display: flex;
-  flex-direction: column;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
+  background-color: var(--bg);
 }
 
 #visualizer-container {
-  position: relative;
-  width: 100%;
-  flex: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   z-index: 0;
-  background-color: var(--bg);
-  min-height: 0;
 }
 
 #canvas {
@@ -39,6 +40,9 @@ body {
 }
 
 #bottom-nav {
+  position: absolute;
+  bottom: 0;
+  left: 0;
   min-height: 5rem;
   padding-bottom: env(safe-area-inset-bottom, 1.25rem);
   width: 100%;
@@ -47,7 +51,7 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 20;
-  flex-shrink: 0;
+  pointer-events: auto;
 }
 
 .nav-container {
