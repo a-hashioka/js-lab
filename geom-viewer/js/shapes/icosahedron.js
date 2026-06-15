@@ -47,10 +47,11 @@ export const ICO_FACES = [
 export const icosahedron = {
   title: "Icosahedron",
   desc: [
-    "The regular icosahedron is a Platonic solid consisting of twenty equilateral triangular faces, twelve vertices, and thirty edges. It exhibits icosahedral symmetry, the highest symmetry of any convex regular polyhedron, and is the dual of the regular dodecahedron. Its geometry is defined by the golden ratio, which determines the spatial distribution of its vertices.",
+    "The regular icosahedron is a Platonic solid consisting of twenty equilateral triangular faces, twelve vertices, and thirty edges. It exhibits icosahedral symmetry, the highest symmetry of any convex regular polyhedron, and is the dual of the regular dodecahedron; connecting the centers of its twenty faces yields a regular dodecahedron. Its geometry is defined by the golden ratio, which determines the spatial distribution of its vertices.",
     "In the Platonic tradition, the icosahedron was associated with the element of 'Water' due to its fluid-like, nearly spherical appearance. In modern science, its structure is a fundamental model for viral capsids (the protein shells of viruses) and geodesic domes, providing a highly efficient way to enclose a volume with minimal surface area.",
   ],
   formulas: [
+    { label: "Schläfli Symbol", eq: "\\{3, 5\\}" },
     { label: "Topology", eq: "V=12, E=30, F=20" },
     { label: "Euler Characteristic", eq: "\\chi = V - E + F = 2" },
     { label: "Dual", eq: "\\text{Dodecahedron}" },

@@ -6,12 +6,14 @@
 export const octahedron = {
   title: "Octahedron",
   desc: [
-    "The regular octahedron is a Platonic solid with 8 equilateral triangular faces, 12 edges, and 6 vertices. It exhibits octahedral symmetry (O_h) and is the dual polyhedron of the cube. It can be viewed as a rectified tetrahedron or a square bipyramid. Its vertices are located at the permutations of (\pm 1, 0, 0).",
+    "The regular octahedron is a Platonic solid with 8 equilateral triangular faces, 12 edges, and 6 vertices. It exhibits octahedral symmetry (O_h) and is the dual polyhedron of the cube; connecting the centers of its eight faces yields a cube. It can be viewed as a rectified tetrahedron or a square bipyramid. Its vertices are located at the permutations of (\\pm 1, 0, 0).",
     "Known since antiquity, it was described by Plato in the 'Timaeus' as representing the element of Air. In crystallography, it is a common form for various minerals, such as diamond and fluorite, due to their cubic crystal systems.",
   ],
   formulas: [
+    { label: "Schläfli Symbol", eq: "\\{3, 4\\}" },
     { label: "Topology", eq: "V=6, E=12, F=8" },
     { label: "Euler Characteristic", eq: "\\chi = V - E + F = 2" },
+    { label: "Dual", eq: "\\text{Cube}" },
     { label: "Implicit", eq: "|x| + |y| + |z| = 1" },
     { label: "Symmetry", eq: "O_h" },
   ],

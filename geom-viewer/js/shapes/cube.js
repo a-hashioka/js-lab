@@ -7,11 +7,13 @@ export const cube = {
   title: "Cube",
   desc: [
     "The cube, or regular hexahedron, is a Platonic solid with six square faces, eight vertices, and twelve edges. It is a highly symmetric object belonging to the octahedral point group, where every face, edge, and vertex is geometrically equivalent, making it the most fundamental shape in Euclidean geometry and spatial tiling.",
-    "In Plato's Timaeus, the cube was associated with the element of 'Earth' due to its stability and ability to tile space (tessellation). It is the dual of the regular octahedron and serves as the basis for the Cartesian coordinate system, representing the volume of three-dimensional space in its simplest form.",
+    "In Plato's Timaeus, the cube was associated with the element of 'Earth' due to its stability and ability to tile space (tessellation). It is the dual of the regular octahedron; connecting the centers of its six faces yields a regular octahedron. It serves as the basis for the Cartesian coordinate system, representing the volume of three-dimensional space in its simplest form.",
   ],
   formulas: [
+    { label: "Schläfli Symbol", eq: "\\{4, 3\\}" },
     { label: "Topology", eq: "V=8, E=12, F=6" },
     { label: "Euler Characteristic", eq: "\\chi = V - E + F = 2" },
+    { label: "Dual", eq: "\\text{Octahedron}" },
     { label: "Symmetry", eq: "O_h" },
   ],
   /**

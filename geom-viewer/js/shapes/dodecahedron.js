@@ -9,10 +9,11 @@ import { PHI } from "../constants.js";
 export const dodecahedron = {
   title: "Dodecahedron",
   desc: [
-    "The regular dodecahedron is a Platonic solid composed of twelve regular pentagonal faces, twenty vertices, and thirty edges. It possesses icosahedral symmetry and is deeply connected to the golden ratio (phi), which governs its spatial coordinates and dihedral angles. It is one of the five convex regular polyhedra known since antiquity.",
+    "The regular dodecahedron is a Platonic solid composed of twelve regular pentagonal faces, twenty vertices, and thirty edges. It possesses icosahedral symmetry and is deeply connected to the golden ratio (phi), which governs its spatial coordinates and dihedral angles. It is one of the five convex regular polyhedra known since antiquity. It is the dual of the regular icosahedron; connecting the centers of its twelve faces yields a regular icosahedron.",
     "In Plato's cosmology, the dodecahedron was associated with the 'Aether' or the universe as a whole, representing the divine quintessence. Its geometry appears in various natural contexts, from the structure of certain viruses to the proposed models of the shape of the universe, such as the Poincaré dodecahedral space.",
   ],
   formulas: [
+    { label: "Schläfli Symbol", eq: "\\{5, 3\\}" },
     { label: "Topology", eq: "V=20, E=30, F=12" },
     { label: "Euler Characteristic", eq: "\\chi = V - E + F = 2" },
     { label: "Dual", eq: "\\text{Icosahedron}" },
