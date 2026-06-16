@@ -75,8 +75,10 @@ function updateNavigation(id) {
     }
   };
 
-  setBtn(prevBtn, orderedIds[index - 1]);
-  setBtn(nextBtn, orderedIds[index + 1]);
+  const prevId = orderedIds[(index - 1 + orderedIds.length) % orderedIds.length];
+  const nextId = orderedIds[(index + 1) % orderedIds.length];
+  setBtn(prevBtn, prevId);
+  setBtn(nextBtn, nextId);
 }
 
 /**

@@ -180,7 +180,10 @@ export const draw = (ctx, data, projected, w, h) => {
 
   // 4. 頂点（ノード）の描画
   if (!data.hideVertices && projected.length < 1500) {
-    projected.forEach((p) => {
+    const indices = data.nodeIndices || projected.map((_, i) => i);
+    indices.forEach((idx) => {
+      const p = projected[idx];
+      if (!p) return;
       const a = Math.min(Math.max((p.scale - 0.3) * 2.0, 0), 0.9);
       if (a <= 0) return;
       ctx.fillStyle = `rgba(0, 0, 0, ${a.toFixed(2)})`;

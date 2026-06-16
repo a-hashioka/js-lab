@@ -22,10 +22,52 @@ const lerp = (a, b, s) => ({
  * @returns {Object} {vertices, faces, faceColors, hideVertices}
  */
 const generateSierpinski = (t, scale = 1.0) => {
+  const maxT = 6.0;
+  const t_capped = Math.min(t, maxT);
+
+  const vertices = [];
+  const faces = [];
+  const faceColors = [];
+
+  // 線形補間用の関数を外部に出すか、内部で定義
+  const addLine = (p1, p2, p = 1.0) => {
+    const mid = vec.midpoint(p1, p2);
+    const end1 = lerp(p1, mid, p);
+    const end2 = lerp(p2, mid, p);
+    const base = vertices.length;
+    vertices.push(p1, end1, p2, end2);
+    faces.push([base, base + 1], [base + 2, base + 3]);
+    faceColors.push("rgba(0, 0, 0, ALPHA)", "rgba(0, 0, 0, ALPHA)");
+  };
+
+  const addTetra = (v) => {
+    const base = vertices.length;
+    vertices.push(...v);
+    [[0, 1, 2], [0, 2, 3], [0, 3, 1], [1, 3, 2]].forEach((f) => {
+      faces.push(f.map((i) => i + base));
+      faceColors.push(null);
+    });
+  };
+
+  // フェーズ0: 最初の正四面体の出現 (t: 0.0 - 1.0)
+  if (t_capped < 1.0) {
+    const tetra = TETRA_VERTICES.map((v) => vec.mul(v, scale));
+    if (t_capped > 0.2 && t_capped < 0.8) {
+      const lineP = (t_capped - 0.2) / 0.6;
+      const [v1, v2, v3, v4] = tetra;
+      const edges = [[v1, v2], [v1, v3], [v1, v4], [v2, v3], [v2, v4], [v3, v4]];
+      edges.forEach(([p1, p2]) => addLine(p1, p2, lineP));
+    } else if (t_capped >= 0.8) {
+      addTetra(tetra);
+    }
+    return { vertices, faces, faceColors, hideVertices: true };
+  }
+
+  // 以降のフェーズ: 分割 (t: 1.0 - 6.0)
+  const sub_t = t_capped - 1.0;
+  const level = Math.floor(sub_t);
+  const progress = sub_t % 1;
   const maxLevel = 5;
-  const t_capped = Math.min(t, maxLevel);
-  const level = Math.floor(t_capped);
-  const progress = t_capped % 1;
 
   // 現在の安定したレベルの四面体リストを取得
   let currentTetras = [TETRA_VERTICES.map((v) => vec.mul(v, scale))];
@@ -47,33 +89,8 @@ const generateSierpinski = (t, scale = 1.0) => {
     currentTetras = nextTetras;
   }
 
-  const vertices = [];
-  const faces = [];
-  const faceColors = [];
-
-  // 四面体を追加
-  const addTetra = (v) => {
-    const base = vertices.length;
-    vertices.push(...v);
-    [[0, 1, 2], [0, 2, 3], [0, 3, 1], [1, 3, 2]].forEach((f) => {
-      faces.push(f.map((i) => i + base));
-      faceColors.push(null); // デフォルトの色を使用
-    });
-  };
-
-  // 線分（2頂点の面）を追加
-  const addLine = (p1, p2, p = 1.0) => {
-    const mid = vec.midpoint(p1, p2);
-    const start = lerp(mid, p1, p);
-    const end = lerp(mid, p2, p);
-    const base = vertices.length;
-    vertices.push(start, end);
-    faces.push([base, base + 1]);
-    faceColors.push("rgba(0, 0, 0, ALPHA)");
-  };
-
   // 安定状態、または最大レベル到達時
-  if (progress < 0.001 || t_capped >= maxLevel) {
+  if (level >= maxLevel || progress < 0.001) {
     currentTetras.forEach((tetra) => addTetra(tetra));
     return { vertices, faces, faceColors, hideVertices: true };
   } else {
@@ -91,12 +108,7 @@ const generateSierpinski = (t, scale = 1.0) => {
       if (progress < 0.8) {
         addTetra(tetra); // 親の面を維持
 
-        // フェーズ1: 中点の出現 (0.0 - 0.2)
-        if (progress <= 0.2) {
-          allMids.forEach(m => vertices.push(m));
-        }
-
-        // フェーズ2: 線分の伸長 (0.2 - 0.8)
+        // 線分の伸長 (0.2 - 0.8)
         if (progress > 0.2) {
           const lineP = (progress - 0.2) / 0.6;
           const opposites = [[0, 5], [1, 4], [2, 3]]; 
@@ -107,7 +119,6 @@ const generateSierpinski = (t, scale = 1.0) => {
               }
             }
           }
-          allMids.forEach(m => vertices.push(m));
         }
       } else {
         // フェーズ3: 分割完了
@@ -118,7 +129,7 @@ const generateSierpinski = (t, scale = 1.0) => {
       }
     });
     
-    return { vertices, faces, faceColors, hideVertices: progress > 0.8 };
+    return { vertices, faces, faceColors, hideVertices: true };
   }
 };
 
