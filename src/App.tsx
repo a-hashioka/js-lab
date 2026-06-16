@@ -1,69 +1,37 @@
 import { useState, useEffect } from 'react'
-import Home from './components/Home'
-import Viewer from './components/Viewer'
-import Gallery from './components/Gallery'
+import GeomViewer from './projects/geom-viewer'
 import './App.css'
 
-type ViewMode = 'home' | 'gallery' | 'viewer';
+type ProjectId = 'none' | 'geom-viewer';
 
 function App() {
-  const [view, setView] = useState<ViewMode>(() => {
+  const [project, setProject] = useState<ProjectId>(() => {
     const params = new URLSearchParams(window.location.search);
-    if (params.get('id')) return 'viewer';
-    if (params.get('view') === 'gallery') return 'gallery';
-    return 'home';
-  });
-  const [currentId, setCurrentId] = useState(() => {
-    const params = new URLSearchParams(window.location.search);
-    return params.get('id') || 'icosahedron';
+    const p = params.get('project');
+    if (p === 'geom-viewer') return 'geom-viewer';
+    return 'none';
   });
 
-  const handleNavigate = (id: string) => {
-    setCurrentId(id);
+  const handleSelectProject = (id: ProjectId) => {
+    setProject(id);
     const url = new URL(window.location.href);
-    url.searchParams.delete('view');
-    url.searchParams.set('id', id);
-    window.history.pushState({}, '', url);
-  };
-
-  const handleSelectShape = (id: string) => {
-    setView('viewer');
-    handleNavigate(id);
-  };
-
-  const handleEnterGallery = () => {
-    setView('gallery');
-    const url = new URL(window.location.href);
-    url.searchParams.set('view', 'gallery');
-    url.searchParams.delete('id');
-    window.history.pushState({}, '', url);
-  };
-
-  const handleBackToGallery = () => {
-    handleEnterGallery();
-  };
-
-  const handleBackToHome = () => {
-    setView('home');
-    const url = new URL(window.location.href);
-    url.searchParams.delete('view');
-    url.searchParams.delete('id');
+    if (id === 'none') {
+      url.searchParams.delete('project');
+      url.searchParams.delete('id');
+    } else {
+      url.searchParams.set('project', id);
+    }
     window.history.pushState({}, '', url);
   };
 
   useEffect(() => {
     const handlePopState = () => {
       const params = new URLSearchParams(window.location.search);
-      const id = params.get('id');
-      const viewParam = params.get('view');
-      
-      if (id) {
-        setCurrentId(id);
-        setView('viewer');
-      } else if (viewParam === 'gallery') {
-        setView('gallery');
+      const p = params.get('project');
+      if (p === 'geom-viewer') {
+        setProject('geom-viewer');
       } else {
-        setView('home');
+        setProject('none');
       }
     };
 
@@ -71,31 +39,25 @@ function App() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  useEffect(() => {
-    let title = 'JS Lab';
-    if (view === 'gallery') title = 'Geometry Gallery';
-    if (view === 'viewer') title = 'Geometry Visualizer';
-    document.title = title;
-  }, [view]);
+  if (project === 'geom-viewer') {
+    return <GeomViewer onExit={() => handleSelectProject('none')} />;
+  }
 
   return (
-    <div className="App">
-      {view === 'home' && <Home onEnterGallery={handleEnterGallery} />}
+    <div className="lab-container">
+      <header className="lab-header">
+        <h1>JS Lab</h1>
+      </header>
       
-      <div className={view === 'gallery' ? '' : 'hidden'}>
-        <Gallery 
-          onSelectShape={handleSelectShape} 
-          onBack={handleBackToHome}
-        />
-      </div>
-
-      {view === 'viewer' && (
-        <Viewer 
-          id={currentId} 
-          onBack={handleBackToGallery} 
-          onNavigate={handleNavigate} 
-        />
-      )}
+      <main className="lab-main">
+        <ul className="project-list">
+          <li>
+            <button className="project-link" onClick={() => handleSelectProject('geom-viewer')}>
+              Geometry Viewer
+            </button>
+          </li>
+        </ul>
+      </main>
     </div>
   )
 }

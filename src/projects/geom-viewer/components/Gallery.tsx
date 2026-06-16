@@ -10,7 +10,7 @@ const Gallery: React.FC<GalleryProps> = ({ onSelectShape, onBack }) => {
   return (
     <main className="gallery-main">
       <nav className="top-nav">
-        <button onClick={onBack} className="back-link-btn">← JS Lab</button>
+        <button onClick={onBack} className="back-link-btn">Back to JS Lab</button>
       </nav>
       <header className="gallery-header">
         <h1>Geometry Gallery</h1>
