@@ -2,103 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>JS Lab</title>
-    <style>
-      :root {
-        --bg: #ffffff;
-        --fg: #1a1a1a;
-        --secondary: #717171;
-        --muted: #a3a3a3;
-        --border: #e5e5e5;
-      }
-
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --bg: #0a0a0a;
-          --fg: #e5e5e5;
-          --secondary: #a3a3a3;
-          --muted: #525252;
-          --border: #262626;
-        }
-      }
-
-      body {
-        font-family:
-          "Inter",
-          -apple-system,
-          BlinkMacSystemFont,
-          sans-serif;
-        background-color: var(--bg);
-        color: var(--fg);
-        margin: 0;
-        padding: 60px 24px;
-        -webkit-font-smoothing: antialiased;
-      }
-
-      main {
-        max-width: 400px;
-        margin: 0 auto;
-      }
-
-      header {
-        margin-bottom: 80px;
-      }
-
-      h1 {
-        font-size: 1.75rem;
-        font-weight: 600;
-        letter-spacing: -0.02em;
-        margin: 0;
-        color: var(--fg);
-      }
-
-      .subtitle {
-        display: block;
-        font-size: 0.8rem;
-        font-weight: 400;
-        letter-spacing: 0.05em;
-        margin-top: 8px;
-        color: var(--secondary);
-      }
-
-      nav ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-
-      nav li {
-        margin-bottom: 40px;
-        position: relative;
-      }
-
-      nav a {
-        color: var(--fg);
-        text-decoration: none;
-        font-size: 1.25rem;
-        font-weight: 400;
-        letter-spacing: -0.01em;
-        display: block;
-        padding-bottom: 12px;
-        border-bottom: 1px solid var(--border);
-      }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.js"></script>
   </head>
   <body>
-    <main>
-      <header>
-        <h1>JS Lab</h1>
-        <span class="subtitle">A collection of web experiments.</span>
-      </header>
-      <nav>
-        <ul>
-          <li>
-            <a href="geom-viewer/index.html">Geometry Viewer</a>
-          </li>
-          <!-- Future links -->
-        </ul>
-      </nav>
-    </main>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
