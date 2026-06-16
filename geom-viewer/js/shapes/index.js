@@ -39,6 +39,12 @@ import { nanotube } from "./nanotube.js";
 import { radiolarian } from "./radiolarian.js";
 import { capsid } from "./capsid.js";
 
+import { breather } from "./breather.js";
+import { graphite } from "./graphite.js";
+import { phyllotaxis } from "./phyllotaxis.js";
+import { diatom } from "./diatom.js";
+import { binaryTree } from "./tree.js";
+
 // ギャラリー用の階層的なカテゴリを定義
 export const disciplines = [
   {
@@ -68,6 +74,7 @@ export const disciplines = [
           "enneper",
           "dini",
           "kuen",
+          "breather",
         ],
       },
       {
@@ -117,7 +124,7 @@ export const disciplines = [
       {
         name: "Crystal Lattices",
         desc: "Ordered arrangements of atoms and ions in solid materials.",
-        shapes: ["diamond"],
+        shapes: ["diamond", "graphite"],
       },
       {
         name: "Molecular Nanostructures",
@@ -134,12 +141,24 @@ export const disciplines = [
       {
         name: "Biological Morphogenesis",
         desc: "Geometric patterns found in plant growth and organic forms.",
-        shapes: ["super"],
+        shapes: ["super", "phyllotaxis"],
       },
       {
         name: "Microscopic Structures",
         desc: "The intricate skeletons and shells of microscopic organisms and viruses.",
-        shapes: ["dna", "radiolarian", "capsid"],
+        shapes: ["dna", "radiolarian", "capsid", "diatom"],
+      },
+    ],
+  },
+  {
+    name: "Engineering & CS",
+    theme: "engineering",
+    desc: "Application of science and math to solve problems and build structures.",
+    groups: [
+      {
+        name: "Recursive Algorithms",
+        desc: "Visualization of data structures and recursive state spaces.",
+        shapes: ["tree"],
       },
     ],
   },
@@ -180,4 +199,9 @@ export const shapes = {
   nanotube,
   radiolarian,
   capsid,
+  breather,
+  graphite,
+  phyllotaxis,
+  diatom,
+  tree: binaryTree,
 };

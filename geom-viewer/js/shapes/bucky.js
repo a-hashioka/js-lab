@@ -9,16 +9,16 @@ import { ICO_VERTICES, ICO_FACES } from "./icosahedron.js";
 export const bucky = {
   title: "Buckyball (C60)",
   desc: [
-    "The Buckyball, or truncated icosahedron, is an Archimedean solid consisting of 12 pentagonal and 20 hexagonal faces. It gained worldwide fame as the molecular structure of Buckminsterfullerene (C60), where carbon atoms occupy the 60 vertices of the polyhedron, forming a stable, cage-like architecture.",
-    "This geometry is named after R. Buckminster Fuller, whose geodesic domes share similar structural principles. It is the standard shape of a soccer ball and is central to the field of nanotechnology and carbon science, where it represents a bridge between discrete mathematics and physical chemistry.",
+    "Buckminsterfullerene (C60) is the most iconic member of the fullerene family, discovered in 1985 by Harold Kroto, Robert Curl, and Richard Smalley—a feat for which they were awarded the 1996 Nobel Prize in Chemistry. It consists of 60 carbon atoms arranged in a truncated icosahedron, creating a highly symmetrical, cage-like molecule often referred to as a 'buckyball'.",
+    "Chemically, the C60 molecule features carbon atoms with $sp^2$-like hybridization, though the curvature of the sphere introduces significant pyramidalization and ring strain. This strain makes the molecule more reactive than planar graphite, often acting as an electron-deficient alkene. The structure is composed of two distinct bond types: [6,6]-junctions (shorter double bonds between two hexagons) and [5,6]-junctions (longer single bonds between a pentagon and a hexagon).",
+    "C60 represents a bridge between bulk materials and discrete molecules, showing extraordinary properties such as superconductivity when doped with alkali metals and the ability to trap smaller atoms or molecules inside its interior cavity (endohedral fullerenes). It remains a cornerstone of nanotechnology, medicinal chemistry, and material science.",
   ],
   formulas: [
-    {
-      label: "Topology",
-      eq: "V=60, \\, E=90, \\, F=32 \\text{ (12 pentagons, 20 hexagons)}",
-    },
-    { label: "Euler Characteristic", eq: "\\chi = V - E + F = 2" },
-    { label: "Symmetry", eq: "I_h" },
+    { label: "Chemical Formula", eq: "C_{60}" },
+    { label: "Hybridization", eq: "sp^{2.27} \\text{ (curved } sp^2)" },
+    { label: "Bond Lengths", eq: "d_{6,6} \\approx 1.40\\text{Å}, \\, d_{5,6} \\approx 1.45\\text{Å}" },
+    { label: "Molecular Point Group", eq: "I_h \\text{ (Icosahedral)}" },
+    { label: "Topology", eq: "F = n/2 + 2 \\implies 12 \\text{ pentagons mandatory}" },
   ],
   /**
    * バッキーボール（切頂二十面体）の頂点と面を生成します。
