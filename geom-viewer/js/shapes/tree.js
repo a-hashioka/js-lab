@@ -22,12 +22,12 @@ export const binaryTree = {
     const vertices = [];
     const faces = [];
 
-    // Animation parameters
+    // アニメーションパラメータ
     const maxDepth = 9;
     const cycle = 500;
     const phase = (counter % cycle) / cycle;
     
-    // Grow from depth 0 to maxDepth
+    // 深さ0からmaxDepthまで成長させる
     let progress;
     if (phase < 0.8) {
       progress = (phase / 0.8) * (maxDepth + 1);
@@ -36,7 +36,7 @@ export const binaryTree = {
     }
 
     /**
-     * Rotates a vector around an orthogonal axis.
+     * 直交する軸の周りにベクトルを回転させる
      */
     const rotate = (v, axis, angle) => {
       const cross = vec.cross(axis, v);
@@ -58,19 +58,20 @@ export const binaryTree = {
       vertices.push(end);
       faces.push([startIndex, endIndex]);
 
-      // Only branch if the current segment is fully grown
+      // 現在のセグメントが完全に成長している場合のみ分岐する
       if (localProgress < 1.0 || depth >= maxDepth) return;
 
       const nextLength = length * 0.75;
-      const ang = 0.6; // Branching angle (~35 degrees)
+      const ang = 0.6; // 分岐角度（約35度）
 
-      // Alternate branching axis based on depth to fill 3D space consistently
-      const axis = (depth % 2 === 0) ? frame.right : frame.forward;
+      // 1段階ごとに分岐平面を入れ替える
+      const axis = frame.right;
 
       const d1 = rotate(frame.dir, axis, ang);
       const d2 = rotate(frame.dir, axis, -ang);
 
-      // Propagate frames to children: keep them orthogonal and consistent
+      // フレームを子に伝播させる：それらを直交かつ一貫した状態に保つ
+      // 常に'right'を使用することで、次のステップでは自動的に直交する平面が選ばれるようになります
       const buildNextFrame = (newDir) => {
         const newRight = normalize(vec.cross(newDir, axis));
         const newForward = normalize(vec.cross(newRight, newDir));
@@ -81,7 +82,7 @@ export const binaryTree = {
       addBranch(endIndex, buildNextFrame(d2), nextLength, depth + 1);
     };
 
-    // Initial root frame
+    // 初期ルートフレーム
     const initialFrame = {
       dir: { x: 0, y: 1, z: 0 },
       right: { x: 1, y: 0, z: 0 },
