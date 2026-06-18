@@ -39,21 +39,22 @@ export const breather: ShapeDefinition = {
   ],
   generate: (counter: number = 0) => {
     /**
-     * a の変化範囲: [0.25, 0.5]
-     * 数学的な定義域は 0 < a < 1。
-     * a が小さいほど細長く、大きいほど太くなります。
-     * この範囲では、ソリトンの特徴的な「呼吸」を安定して観察できます。
+     * a の変化範囲: [0.5, 0.6]
+     * 数学的な同期点 a = 0.6 (w = 0.8) を中心に、
+     * v の範囲を 10 * PI に設定することで、回転と脈動が美しく揃います。
      */
-    const a = 0.375 + 0.125 * Math.sin(counter * 0.02);
+    const a = 0.55 + 0.05 * Math.sin(counter * 0.03);
     const w = Math.sqrt(1 - a * a);
 
-    // u は a に反比例して広がる
-    const uLimit = 7.0 / a; 
-    // v は 6.5周期分 (6.5 * 2pi/w) を描画
-    const vLimit = (6.5 * 2 * Math.PI) / w;
+    // u は端が十分に細くなるまで描画 (10/a)
+    const uLimit = 10.0 / a; 
+    // v は 10*PI に設定し、回転と脈動の周期を同期させる
+    const vLimit = 10 * Math.PI;
 
-    // 解像度をさらに最適化 (u:30, v:140)
-    return parametric(30, 140, (u: number, v: number) => {
+    // 解像度のバランスを最適化 (u:40, v:100)
+    // 縦方向(u)の分割を増やすことで脈動の波形を滑らかにしつつ、
+    // 横方向(v)を絞って全体の節点数（約4000面）を抑えています。
+    return parametric(40, 100, (u: number, v: number) => {
       const au = a * u;
       const wv = w * v;
       
@@ -72,8 +73,8 @@ export const breather: ShapeDefinition = {
       const y = (-2 * w * ch * (w * cv * cwv + sv * swv)) / denom;
       const z = (-2 * w * ch * (w * sv * cwv - cv * swv)) / denom;
       
-      // スケールをさらに縮小 (0.12 -> 0.08)
-      const s = 0.08;
+      // スケールをさらに調整 (0.11)
+      const s = 0.11;
       return { x: x * s, y: y * s, z: z * s };
     }, [-uLimit, uLimit], [0, vLimit]);
   }
