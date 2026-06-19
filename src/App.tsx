@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import GeomViewer from "./projects/geom-viewer";
-import VFXGallery from "./projects/vfx-gallery";
+import VFXMuseum from "./projects/vfx-museum";
 import "./App.css";
 
-type ProjectId = "none" | "geom-viewer" | "vfx-gallery";
+type ProjectId = "none" | "geom-viewer" | "vfx-museum";
 
 function App() {
   const [project, setProject] = useState<ProjectId>(() => {
     const params = new URLSearchParams(window.location.search);
     const p = params.get("project");
     if (p === "geom-viewer") return "geom-viewer";
-    if (p === "vfx-gallery") return "vfx-gallery";
+    if (p === "vfx-museum") return "vfx-museum";
     return "none";
   });
 
@@ -32,8 +32,8 @@ function App() {
       const p = params.get("project");
       if (p === "geom-viewer") {
         setProject("geom-viewer");
-      } else if (p === "vfx-gallery") {
-        setProject("vfx-gallery");
+      } else if (p === "vfx-museum") {
+        setProject("vfx-museum");
       } else {
         setProject("none");
       }
@@ -47,35 +47,58 @@ function App() {
     return <GeomViewer onExit={() => handleSelectProject("none")} />;
   }
 
-  if (project === "vfx-gallery") {
-    return <VFXGallery onExit={() => handleSelectProject("none")} />;
+  if (project === "vfx-museum") {
+    return <VFXMuseum onExit={() => handleSelectProject("none")} />;
   }
 
   return (
     <div className="lab-container">
       <header className="lab-header">
-        <h1>JS Lab</h1>
+        <div className="lab-title-row">
+          <div className="lab-title-group">
+            <h1>JS LAB</h1>
+            <p className="lab-subtitle">
+              Creative Coding & Visual Computing Experiments
+            </p>
+          </div>
+        </div>
+        <div className="lab-line"></div>
       </header>
 
       <main className="lab-main">
-        <ul className="project-list">
-          <li>
-            <button
-              className="project-link"
-              onClick={() => handleSelectProject("geom-viewer")}
-            >
-              Geometry Viewer
-            </button>
-          </li>
-          <li>
-            <button
-              className="project-link"
-              onClick={() => handleSelectProject("vfx-gallery")}
-            >
-              VFX Gallery
-            </button>
-          </li>
-        </ul>
+        <div className="project-grid">
+          <button
+            className="project-card"
+            onClick={() => handleSelectProject("geom-viewer")}
+          >
+            <div className="project-card-header">
+              <span className="project-id">EXP_01</span>
+              <span className="project-arrow">→</span>
+            </div>
+            <h2 className="project-title">Geometry Viewer</h2>
+            <p className="project-desc">
+              Interactive 3D and 4D mathematical surface renderer. Explore
+              Platonic solids, fractals, and chaotic structures driven by a
+              custom canvas engine.
+            </p>
+          </button>
+
+          <button
+            className="project-card"
+            onClick={() => handleSelectProject("vfx-museum")}
+          >
+            <div className="project-card-header">
+              <span className="project-id">EXP_02</span>
+              <span className="project-arrow">→</span>
+            </div>
+            <h2 className="project-title">VFX Museum</h2>
+            <p className="project-desc">
+              A curated exhibition of real-time particle simulations, retro
+              ASCII filters, matrix code waterfalls, and interactive generative
+              visual effects.
+            </p>
+          </button>
+        </div>
       </main>
     </div>
   );

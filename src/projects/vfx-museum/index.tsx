@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import Gallery from "./components/Gallery";
+import Museum from "./components/Museum";
 import MatrixRain from "./components/MatrixRain";
 import ParticleNetwork from "./components/ParticleNetwork";
 import MouseParallax from "./components/MouseParallax";
@@ -9,16 +9,16 @@ import ASCII from "./components/ASCII";
 import CyberGrid from "./components/CyberGrid";
 import "./index.css";
 
-type ViewMode = "gallery" | "viewer";
+type ViewMode = "museum" | "viewer";
 
-interface VFXGalleryProps {
+interface VFXMuseumProps {
   onExit: () => void;
 }
 
-const VFXGallery: React.FC<VFXGalleryProps> = ({ onExit }) => {
+const VFXMuseum: React.FC<VFXMuseumProps> = ({ onExit }) => {
   const [view, setView] = useState<ViewMode>(() => {
     const params = new URLSearchParams(window.location.search);
-    return params.get("vfx") ? "viewer" : "gallery";
+    return params.get("vfx") ? "viewer" : "museum";
   });
 
   const [activeSlide, setActiveSlide] = useState(() => {
@@ -65,8 +65,8 @@ const VFXGallery: React.FC<VFXGalleryProps> = ({ onExit }) => {
     window.history.pushState({}, "", url);
   };
 
-  const handleBackToGallery = () => {
-    setView("gallery");
+  const handleBackToMuseum = () => {
+    setView("museum");
     const url = new URL(window.location.href);
     url.searchParams.delete("vfx");
     window.history.pushState({}, "", url);
@@ -80,7 +80,7 @@ const VFXGallery: React.FC<VFXGalleryProps> = ({ onExit }) => {
         setActiveSlide(vfx);
         setView("viewer");
       } else {
-        setView("gallery");
+        setView("museum");
       }
     };
     window.addEventListener("popstate", handlePopState);
@@ -104,12 +104,12 @@ const VFXGallery: React.FC<VFXGalleryProps> = ({ onExit }) => {
   };
 
   return (
-    <div className={`vfx-wrapper ${view === "gallery" || isWhiteBG ? "white-theme" : "dark-theme"}`}>
-      {view === "gallery" ? (
-        <Gallery onSelectVFX={handleSelectVFX} onBack={onExit} />
+    <div className={`vfx-wrapper ${view === "museum" || isWhiteBG ? "white-theme" : "dark-theme"}`}>
+      {view === "museum" ? (
+        <Museum onSelectVFX={handleSelectVFX} onBack={onExit} />
       ) : (
         <div className="vfx-container" ref={containerRef}>
-          <button className="vfx-exit-btn" onClick={handleBackToGallery}>
+          <button className="vfx-exit-btn" onClick={handleBackToMuseum}>
             ✕
           </button>
 
@@ -166,10 +166,7 @@ const VFXGallery: React.FC<VFXGalleryProps> = ({ onExit }) => {
             </div>
           </section>
 
-          <div
-            className="vfx-nav"
-            style={{ color: isWhiteBG ? "#000" : "#fff" }}
-          >
+          <div className="vfx-nav">
             {[
               "matrix",
               "network",
@@ -183,8 +180,14 @@ const VFXGallery: React.FC<VFXGalleryProps> = ({ onExit }) => {
                 key={id}
                 href={`#${id}`}
                 className={activeSlide === id ? "active" : ""}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document
+                    .getElementById(id)
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
                 style={{
-                  backgroundColor:
+                  background:
                     activeSlide === id
                       ? isWhiteBG
                         ? "#000"
@@ -202,4 +205,4 @@ const VFXGallery: React.FC<VFXGalleryProps> = ({ onExit }) => {
   );
 };
 
-export default VFXGallery;
+export default VFXMuseum;

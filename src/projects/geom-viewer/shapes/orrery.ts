@@ -126,6 +126,7 @@ export const orrery: ShapeDefinition = {
   desc: [
     "An orrery is a mechanical model of the Solar System that illustrates the relative positions and motions of the planets and moons according to the heliocentric model. The study of celestial mechanics was revolutionized by Nicolaus Copernicus, who proposed that the Sun, rather than the Earth, is at the center of the universe. This shift laid the groundwork for modern astronomy and our understanding of the cosmic order.",
     "The motion of the planets was further refined by Johannes Kepler's three laws of planetary motion, which described their orbits as ellipses. Later, Sir Isaac Newton's law of universal gravitation provided the physical basis for these movements, demonstrating that the same force that makes an apple fall to the ground also keeps the planets in their orbits around the Sun. This unification of terrestrial and celestial physics is a cornerstone of the Scientific Revolution.",
+    "In this simulation, the eight planets—Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Neptune—are rendered alongside their primary satellites, such as the Moon, Phobos, Deimos, the Galilean moons, Titan, Titania, and Triton. Each body moves according to its relative orbital velocity, and Saturn is depicted with its characteristic ring system, illustrating the complex and beautiful clockwork of our solar system.",
   ],
   formulas: [
     { label: "Universal Gravitation", eq: "F = G \\frac{m_1 m_2}{r^2}" },

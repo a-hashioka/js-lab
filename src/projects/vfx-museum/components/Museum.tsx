@@ -1,6 +1,6 @@
 import React from "react";
 
-interface GalleryProps {
+interface MuseumProps {
   onSelectVFX: (id: string) => void;
   onBack: () => void;
 }
@@ -15,19 +15,19 @@ const vfxItems = [
   { id: "grid", name: "Grid", desc: "80s Synthwave aesthetic" },
 ];
 
-const Gallery: React.FC<GalleryProps> = ({ onSelectVFX, onBack }) => {
+const Museum: React.FC<MuseumProps> = ({ onSelectVFX, onBack }) => {
   return (
-    <main className="vfx-gallery-main">
+    <main className="vfx-museum-main">
       <nav className="vfx-top-nav">
         <button onClick={onBack} className="vfx-back-btn">
           Back to JS Lab
         </button>
       </nav>
-      <header className="vfx-gallery-header">
+      <header className="vfx-museum-header">
         <h1>VFX Museum</h1>
         <p>A collection of legendary visual effects.</p>
       </header>
-      <div className="vfx-gallery-grid">
+      <div className="vfx-museum-grid">
         {vfxItems.map((item) => (
           <button
             key={item.id}
@@ -43,4 +43,4 @@ const Gallery: React.FC<GalleryProps> = ({ onSelectVFX, onBack }) => {
   );
 };
 
-export default Gallery;
+export default Museum;

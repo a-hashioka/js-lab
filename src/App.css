@@ -1,46 +1,217 @@
+/* Color Palette & Custom Properties */
+:root {
+  --accent-rgb: 16, 185, 129; /* Emerald Green */
+  --accent: rgb(var(--accent-rgb));
+  --accent-hover: rgba(var(--accent-rgb), 0.04);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --accent-rgb: 52, 211, 153; /* Brighter Emerald in dark mode */
+  }
+}
+
 .lab-container {
-  max-width: 480px;
+  max-width: 640px;
   margin: 0 auto;
-  padding: 60px 24px;
-  color: var(--fg);
+  padding: 80px 24px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .lab-header {
-  margin-bottom: 60px;
+  margin-bottom: 48px;
+}
+
+.lab-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+
+.lab-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .lab-header h1 {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 1.75rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.02em;
-  margin: 0;
-}
-
-.project-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.project-list li {
-  margin-bottom: 12px;
-}
-
-.project-link {
-  font-size: 1.25rem;
   color: var(--fg);
-  text-decoration: none;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  transition: opacity 0.2s;
+  line-height: 1;
+  margin: 0;
 }
 
-.project-link:hover {
-  opacity: 0.6;
+.lab-subtitle {
+  font-size: 0.85rem;
+  color: var(--secondary);
+  margin: 0;
+}
+
+.lab-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--secondary);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: rgba(var(--accent-rgb), 0.02);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+
+.lab-line {
+  height: 1px;
+  background: var(--border);
+  width: 100%;
 }
 
 .lab-main {
-  min-height: 200px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.project-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.project-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover {
+  border-color: var(--accent);
+  background-color: var(--accent-hover);
+  box-shadow: 0 4px 20px rgba(var(--accent-rgb), 0.02);
+}
+
+.project-card-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.project-id {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: var(--secondary);
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.project-card:hover .project-id {
+  color: var(--accent);
+}
+
+.project-arrow {
+  font-size: 1.1rem;
+  color: var(--muted);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover .project-arrow {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+.project-title {
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+
+.project-desc {
+  font-size: 0.85rem;
+  color: var(--secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.lab-footer {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+@media (max-width: 520px) {
+  .lab-container {
+    padding: 48px 16px;
+  }
+
+  .lab-title-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .lab-status {
+    align-self: flex-start;
+  }
+
+  .project-card {
+    padding: 20px;
+  }
+
+  .project-title {
+    font-size: 1.2rem;
+  }
 }
